@@ -149,12 +149,11 @@ include __DIR__ . '/includes/header.php';
   </section>
 </div>
 
-<!-- Assessment Script Logic -->
-<script type="module">
-  import { AssessmentEngine } from './js/assessment-engine.js';
-
+<!-- Assessment Script Logic (Universal Wasmer Edge Compatible) -->
+<script src="js/assessment-engine.js"></script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
-    window.assessmentEngine = new AssessmentEngine(<?= json_encode($assessmentData) ?>);
+    window.assessmentEngine = new window.AssessmentEngine(<?= json_encode($assessmentData) ?>);
   });
 </script>
 

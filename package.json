@@ -2,7 +2,6 @@
   "name": "hestens-learning",
   "version": "1.0.0",
   "description": "Accessible, Neurodiversity-Centered E-Learning Platform (Pre-K to 12th Grade) built with PHP.",
-  "type": "module",
   "scripts": {
     "start": "php -S localhost:8000",
     "serve:xampp": "C:\\xampp\\php\\php.exe -S localhost:8000"

@@ -87,7 +87,9 @@
   <!-- Include Accessibility FAB & Accommodations Overlay -->
   <?php include __DIR__ . '/a11y-fab.php'; ?>
 
-  <!-- Core Application Scripts (ES Modules) -->
-  <script type="module" src="js/app.js"></script>
+  <!-- Universal Application Scripts (Wasmer Edge / WebAssembly Compatible) -->
+  <script src="js/a11y-engine.js"></script>
+  <script src="js/interactive-widgets.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -145,12 +145,10 @@ include __DIR__ . '/includes/header.php';
 </div>
 
 <!-- Auto-Initialize Lesson Interactive Components on Page Load -->
-<script type="module">
-  import { WidgetManager } from './js/interactive-widgets.js';
-
+<script>
   document.addEventListener('DOMContentLoaded', () => {
-    const a11y = window.hestensApp?.a11y;
-    const widgetMgr = new WidgetManager(a11y);
+    const a11y = window.hestensApp ? window.hestensApp.a11y : new window.A11yEngine();
+    const widgetMgr = new window.WidgetManager(a11y);
 
     // Render Widget
     const widgetBox = document.getElementById('embedded-widget-container');
