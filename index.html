@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hestens Learning - E-learning designed for students with learning differences, dyslexia, ADHD, and sensory processing needs. WCAG 2.2 AAA compliant.">
+  <title>Hestens Learning | Accessible & Neurodiversity-First E-Learning</title>
+
+  <!-- Google Fonts: Lexend, Atkinson Hyperlegible, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;600;700;800&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Design System & Components CSS -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body data-font="lexend">
+
+  <!-- WCAG Skip to Main Content Link -->
+  <a href="#main-content-area" class="skip-link">Skip to Main Content (Press Enter)</a>
+
+  <!-- ARIA Live Region for Screen Reader Announcements -->
+  <div id="a11y-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Exit Zen Mode Button (Visible when Zen Mode active) -->
+  <div class="zen-exit-button">
+    <button id="exit-zen-btn" class="btn btn-primary" aria-label="Exit Zen Distraction Free Mode">
+      <span>✕</span> Exit Zen Mode (Alt+Z)
+    </button>
+  </div>
+
+  <!-- =========================================================================
+       Application Header & Main Controls
+       ========================================================================= -->
+  <header class="app-header" role="banner">
+    <a href="#" id="brand-home-link" class="brand-wrapper" aria-label="Hestens Learning Home">
+      <div class="brand-icon" aria-hidden="true">HL</div>
+      <div class="brand-text">
+        <h1>Hestens Learning</h1>
+        <p>E-Learning Built for Diverse Minds</p>
+      </div>
+    </a>
+
+    <nav class="header-actions" aria-label="Main Toolbar">
+      <!-- Focus Pomodoro Button -->
+      <button id="toggle-timer-btn" class="btn btn-secondary btn-icon-only" aria-label="Toggle Focus Timer" title="Focus Timer">
+        <span aria-hidden="true">⏱️</span>
+      </button>
+
+      <!-- Learning Notes & Voice Dictation Button -->
+      <button id="open-notes-btn" class="btn btn-secondary" aria-label="Open Learning Notes & Audio Dictation">
+        <span aria-hidden="true">📝</span> <span>My Notes</span>
+      </button>
+
+      <!-- Keyboard Shortcuts Cheatsheet -->
+      <button id="open-shortcuts-btn" class="btn btn-secondary btn-icon-only" aria-label="View Keyboard Shortcuts (?)" title="Keyboard Shortcuts (?)">
+        <span aria-hidden="true">⌨️</span>
+      </button>
+
+      <!-- Accessibility Settings Button -->
+      <button id="open-a11y-drawer-btn" class="btn btn-primary" aria-label="Open Accessibility & Reading Accommodations Settings (Alt+A)">
+        <span aria-hidden="true">⚙️</span> <span>Accessibility (Alt+A)</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- =========================================================================
+       Main Content Area
+       ========================================================================= -->
+  <main id="main-content-area" class="main-content" role="main">
+
+    <!-- ================= CATALOG VIEW ================= -->
+    <div id="catalog-view">
+      <!-- Hero Welcome Banner -->
+      <section class="hero-banner" aria-labelledby="hero-title-text">
+        <div class="hero-text">
+          <div class="hero-badge">
+            <span aria-hidden="true">✨</span> Multi-Sensory & Low-Stress Learning
+          </div>
+          <h2 id="hero-title-text" class="hero-title">Learn at Your Own Pace, In Your Own Way.</h2>
+          <p class="hero-subtitle">
+            Experience bite-sized interactive lessons designed with OpenDyslexic fonts, visual aids, text-to-speech, and zero punitive timers.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-chip">
+              <span aria-hidden="true">🏆</span>
+              <span id="stat-completed-lessons">0 / 5 Mastered</span>
+            </div>
+            <div class="stat-chip">
+              <span aria-hidden="true">🎧</span>
+              <span>Audio Narrator Ready</span>
+            </div>
+            <div class="stat-chip">
+              <span aria-hidden="true">📖</span>
+              <span>OpenDyslexic Enabled</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Course Catalog Section -->
+      <section aria-labelledby="catalog-heading">
+        <div class="section-header">
+          <h2 id="catalog-heading" class="section-title">Explore Interactive Courses</h2>
+          <div class="filter-tabs" role="tablist" aria-label="Filter courses by category">
+            <button class="filter-tab active" data-category="all" role="tab" aria-selected="true">All Subjects</button>
+            <button class="filter-tab" data-category="Space" role="tab" aria-selected="false">Space & Science</button>
+            <button class="filter-tab" data-category="Math" role="tab" aria-selected="false">Everyday Math</button>
+            <button class="filter-tab" data-category="Technology" role="tab" aria-selected="false">Coding & Logic</button>
+          </div>
+        </div>
+
+        <div id="course-grid" class="course-grid">
+          <!-- Dynamic Course Cards Loaded via JS -->
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= LESSON PLAYER VIEW ================= -->
+    <div id="lesson-player-view" class="lesson-player-view" aria-live="polite">
+      <!-- Lesson Navigation Header -->
+      <div class="lesson-header-bar">
+        <div class="lesson-nav-info">
+          <button id="back-to-catalog-btn" class="btn btn-secondary" aria-label="Return to Course Catalog">
+            <span>◀</span> <span>All Courses</span>
+          </button>
+          <div>
+            <h3 id="current-course-name" style="font-size: 1.1rem; font-weight: 700;">Course Name</h3>
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Step-by-step interactive lesson</span>
+          </div>
+        </div>
+        <div class="lesson-stepper" id="lesson-stepper-dots" aria-label="Lesson Progress Steps">
+          <!-- Stepper dots generated dynamically -->
+        </div>
+      </div>
+
+      <!-- Narration & Audio Controls Bar -->
+      <div class="audio-narrator-bar">
+        <div class="audio-controls">
+          <button class="btn btn-primary tts-toggle-btn" aria-label="Listen to this lesson read aloud (Alt+S)">
+            <span aria-hidden="true">🔊</span> <span>Listen (Aloud)</span>
+          </button>
+          <label for="tts-speed-select" style="font-size: 0.85rem; font-weight: 700;">Voice Speed:</label>
+          <select id="tts-speed-select" class="audio-speed-select" aria-label="Adjust voice reading rate">
+            <option value="0.75">0.75x (Relaxed)</option>
+            <option value="1.0" selected>1.0x (Normal)</option>
+            <option value="1.25">1.25x (Brisk)</option>
+            <option value="1.5">1.5x (Fast)</option>
+          </select>
+        </div>
+        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">
+          💡 Tip: Press <kbd class="kbd-badge">Alt+R</kbd> for the Reading Line Ruler
+        </span>
+      </div>
+
+      <!-- Hidden Audio Script for TTS Engine -->
+      <div id="lesson-audio-script" class="sr-only"></div>
+
+      <!-- Micro-Lesson Core Content Chunk -->
+      <article class="lesson-content-card">
+        <span id="lesson-badge-label" class="lesson-chunk-badge">Core Concept</span>
+        <h2 id="lesson-title-heading" class="lesson-chunk-title">Lesson Title</h2>
+
+        <!-- Lesson Prose Body (Supports Bionic Reading & TTS Karaoke) -->
+        <div id="lesson-prose-container" class="lesson-prose bionic-target">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- "Explain Simply / TL;DR" Summary Box -->
+        <div class="simple-explain-box" role="region" aria-label="Plain language summary">
+          <div class="simple-explain-title">
+            <span aria-hidden="true">💡</span> <span>Explain Simply (TL;DR)</span>
+          </div>
+          <p id="simple-explain-content" class="simple-explain-text">
+            Simple plain-language summary of this core concept.
+          </p>
+        </div>
+
+        <!-- Embedded Interactive Multi-Sensory Widget -->
+        <div id="embedded-widget-container" class="widget-container" role="region" aria-label="Interactive Learning Widget">
+          <!-- Widget rendered dynamically -->
+        </div>
+
+        <!-- Active Recall Flashcards Section -->
+        <div id="flashcards-container" style="margin-top: 2rem;">
+          <!-- Flashcards rendered dynamically -->
+        </div>
+
+        <!-- Low-Stress Knowledge Check Quiz -->
+        <div id="lesson-quiz-container" class="quiz-container" role="region" aria-label="Low stress knowledge check">
+          <!-- Quiz rendered dynamically -->
+        </div>
+
+        <!-- Lesson Navigation Footer Buttons -->
+        <div class="lesson-footer-bar">
+          <button id="prev-lesson-btn" class="btn btn-secondary" aria-label="Go to previous lesson chunk">
+            ◀ Previous Lesson
+          </button>
+          <button id="next-lesson-btn" class="btn btn-primary" aria-label="Go to next lesson chunk">
+            Next Lesson ➔
+          </button>
+        </div>
+      </article>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       Floating Assistive Quick-Bar (Always Present at Bottom Right)
+       ========================================================================= -->
+  <aside class="a11y-quickbar" aria-label="Assistive Quick Actions Toolbar">
+    <button id="quick-ruler-btn" class="quickbar-btn" data-tooltip="Reading Ruler (Alt+R)" aria-label="Toggle Reading Ruler">
+      📏
+    </button>
+    <button id="quick-bionic-btn" class="quickbar-btn" data-tooltip="Bionic Reading Mode" aria-label="Toggle Bionic Reading Mode">
+      👁️
+    </button>
+    <button id="quick-tts-btn" class="quickbar-btn tts-toggle-btn" data-tooltip="Listen Aloud (Alt+S)" aria-label="Toggle Text to Speech Audio">
+      🔊
+    </button>
+    <button id="quick-zen-btn" class="quickbar-btn" data-tooltip="Zen Distraction-Free Mode (Alt+Z)" aria-label="Toggle Zen Mode">
+      🧘
+    </button>
+  </aside>
+
+  <!-- =========================================================================
+       Slide-Over Accessibility Settings Drawer
+       ========================================================================= -->
+  <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+
+  <section id="a11y-drawer" class="a11y-drawer" aria-labelledby="drawer-title-heading" aria-modal="true" role="dialog">
+    <div class="drawer-header">
+      <div id="drawer-title-heading" class="drawer-title">
+        <span aria-hidden="true">⚙️</span> Accommodations Center
+      </div>
+      <button id="close-a11y-drawer-btn" class="btn btn-secondary btn-icon-only" aria-label="Close Accessibility Settings">
+        ✕
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Section 1: Typography Selection -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">
+          <span>🔤</span> Font Family
+        </div>
+        <div class="control-grid">
+          <button class="control-pill font-btn" data-font="opendyslexic">
+            <span>📖</span> OpenDyslexic
+          </button>
+          <button class="control-pill font-btn active" data-font="lexend">
+            <span>✨</span> Lexend (Clean)
+          </button>
+          <button class="control-pill font-btn" data-font="atkinson">
+            <span>👁️</span> Atkinson Hyper
+          </button>
+          <button class="control-pill font-btn" data-font="sans">
+            <span>📐</span> Modern Sans
+          </button>
+        </div>
+      </div>
+
+      <!-- Section 2: Sensory Themes & Color Tints -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">
+          <span>🎨</span> Visual Theme & Color Tint
+        </div>
+        <div class="control-grid">
+          <button class="control-pill theme-btn active" data-theme="dark">
+            <span>🌙</span> Calm Dark
+          </button>
+          <button class="control-pill theme-btn" data-theme="light">
+            <span>☀️</span> Crisp Light
+          </button>
+          <button class="control-pill theme-btn" data-theme="sepia">
+            <span>📜</span> Warm Sepia (Irlen)
+          </button>
+          <button class="control-pill theme-btn" data-theme="calm-green">
+            <span>🌿</span> Sage Green
+          </button>
+          <button class="control-pill theme-btn" data-theme="calm-blue">
+            <span>🌊</span> Serene Blue
+          </button>
+          <button class="control-pill theme-btn" data-theme="high-contrast">
+            <span>⚡</span> High Contrast AAA
+          </button>
+        </div>
+      </div>
+
+      <!-- Section 3: Fine Typography Tuning -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">
+          <span>📏</span> Text Spacing & Sizing
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Font Size Scale</span>
+            <span id="font-size-val">100%</span>
+          </div>
+          <input type="range" id="font-size-slider" min="0.8" max="1.6" step="0.05" value="1.0" class="a11y-range" aria-label="Font Size Scale">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Line Height Spacing</span>
+            <span id="line-height-val">1.65x</span>
+          </div>
+          <input type="range" id="line-height-slider" min="1.3" max="2.4" step="0.1" value="1.65" class="a11y-range" aria-label="Line Height Spacing">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Letter Spacing</span>
+            <span id="letter-spacing-val">0.02em</span>
+          </div>
+          <input type="range" id="letter-spacing-slider" min="0" max="0.15" step="0.01" value="0.02" class="a11y-range" aria-label="Letter Spacing">
+        </div>
+      </div>
+
+      <!-- Section 4: Assistive Focus & Cognitive Aids -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">
+          <span>🧠</span> Cognitive & Focus Aids
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <strong>Bionic Reading Guide</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Bolds word starts for faster eye-tracking</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-bionic">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <strong>Reading Line Ruler</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Tinted guide that follows your line</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-ruler">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <strong>Focus Mask Dimmer</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Dims screen background outside focus</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-mask">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <strong>Reduced Motion</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Disables animations and transitions</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-motion">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <strong>Gentle Sound Feedback</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Calm audio cues for actions & success</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-sound" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Learning Notes & Speech-to-Text Drawer
+       ========================================================================= -->
+  <aside id="notes-drawer" class="notes-drawer" aria-labelledby="notes-heading" role="complementary">
+    <div class="drawer-header">
+      <div id="notes-heading" class="drawer-title">
+        <span aria-hidden="true">📝</span> My Learning Notes
+      </div>
+      <button id="close-notes-btn" class="btn btn-secondary btn-icon-only" aria-label="Close Notes Drawer">
+        ✕
+      </button>
+    </div>
+    <div class="notes-editor">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button id="voice-dictate-btn" class="btn btn-secondary" aria-label="Dictate thoughts with your voice (Speech to Text)">
+          <span>🎙️</span> <span>Dictate (Voice)</span>
+        </button>
+        <div id="voice-status-indicator" class="voice-recording-status" style="display:none;">
+          <div class="voice-pulsing-dot"></div>
+          <span>Listening...</span>
+        </div>
+      </div>
+      <textarea id="notes-textarea" class="notes-textarea" placeholder="Jot down your questions, key takeaways, or voice thoughts here. Notes save automatically..."></textarea>
+      <span style="font-size: 0.8rem; color: var(--text-muted);">💾 Notes automatically save to your local browser storage.</span>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       Floating Focus Pomodoro Timer
+       ========================================================================= -->
+  <aside id="focus-timer-widget" class="focus-timer-floating" aria-labelledby="timer-heading" role="complementary">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <strong id="timer-heading" style="font-size: 0.95rem;">⏱️ Focus Session</strong>
+      <button class="btn btn-secondary btn-icon-only" style="min-width:32px; min-height:32px; padding:0;" onclick="document.getElementById('focus-timer-widget').classList.remove('active')" aria-label="Close Timer Widget">✕</button>
+    </div>
+    <div id="timer-display-text" class="timer-display">25:00</div>
+    <div class="timer-controls">
+      <button id="timer-start-pause-btn" class="btn btn-primary" style="font-size:0.85rem; padding:0.4rem 0.8rem;">▶ Start Focus</button>
+      <button id="timer-reset-btn" class="btn btn-secondary" style="font-size:0.85rem; padding:0.4rem 0.8rem;">Reset</button>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       Keyboard Shortcuts Modal Cheatsheet
+       ========================================================================= -->
+  <div id="shortcuts-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="shortcuts-modal-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="shortcuts-modal-title" style="font-size: 1.3rem; font-weight: 800;">⌨️ Keyboard Shortcuts & Accessibility Hotkeys</h3>
+        <button id="close-shortcuts-btn" class="btn btn-secondary btn-icon-only" aria-label="Close Shortcuts Modal">✕</button>
+      </div>
+      <table class="shortcut-table">
+        <tbody>
+          <tr>
+            <td><kbd class="kbd-badge">Alt</kbd> + <kbd class="kbd-badge">A</kbd></td>
+            <td>Open/Close Accessibility Accommodations Drawer</td>
+          </tr>
+          <tr>
+            <td><kbd class="kbd-badge">Alt</kbd> + <kbd class="kbd-badge">R</kbd></td>
+            <td>Toggle Reading Line Ruler</td>
+          </tr>
+          <tr>
+            <td><kbd class="kbd-badge">Alt</kbd> + <kbd class="kbd-badge">S</kbd></td>
+            <td>Start / Stop Text-to-Speech Audio Narration</td>
+          </tr>
+          <tr>
+            <td><kbd class="kbd-badge">Alt</kbd> + <kbd class="kbd-badge">Z</kbd></td>
+            <td>Toggle Zen Distraction-Free Focus Mode</td>
+          </tr>
+          <tr>
+            <td><kbd class="kbd-badge">Tab</kbd> / <kbd class="kbd-badge">Shift+Tab</kbd></td>
+            <td>Navigate through all interactive controls with high-visibility focus ring</td>
+          </tr>
+          <tr>
+            <td><kbd class="kbd-badge">Space</kbd> / <kbd class="kbd-badge">Enter</kbd></td>
+            <td>Flip active recall flashcard / Activate button</td>
+          </tr>
+          <tr>
+            <td><kbd class="kbd-badge">?</kbd></td>
+            <td>Open this keyboard shortcuts cheatsheet</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Application Scripts (ES Modules) -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

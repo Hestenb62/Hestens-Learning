@@ -1,0 +1,21 @@
+{
+  "name": "hestens-learning",
+  "version": "1.0.0",
+  "description": "E-learning designed by and for students with learning disabilities and neurodivergent minds.",
+  "type": "module",
+  "scripts": {
+    "start": "npx -y serve . -l 3000",
+    "dev": "npx -y serve . -l 3000"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "dyslexia",
+    "opendyslexic",
+    "adhd",
+    "neurodiversity",
+    "elearning"
+  ],
+  "author": "Hestens Learning",
+  "license": "Apache-2.0"
+}

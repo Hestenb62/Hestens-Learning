@@ -1,0 +1,324 @@
+/* ==========================================================================
+   Hestens Learning - Design System & Accessibility Tokens
+   ========================================================================== */
+
+/* --- OpenDyslexic Font Face Declarations --- */
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('../fonts/OpenDyslexic/OpenDyslexic-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('../fonts/OpenDyslexic/OpenDyslexic-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('../fonts/OpenDyslexic/OpenDyslexic-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Root Variables & Theme Palettes --- */
+:root {
+  /* Typography Variables */
+  --font-family-base: 'Lexend', system-ui, -apple-system, sans-serif;
+  --font-family-opendyslexic: 'OpenDyslexic', sans-serif;
+  --font-family-atkinson: 'Atkinson Hyperlegible', sans-serif;
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  --font-size-scale: 1;
+  --base-font-size: calc(16px * var(--font-size-scale));
+  --font-line-height: 1.65;
+  --font-letter-spacing: 0.02em;
+  --font-word-spacing: 0.05em;
+  --paragraph-spacing: 1.5rem;
+
+  /* Theme: Default Modern Dark (Calm Slate) */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-card: rgba(30, 41, 59, 0.85);
+  --bg-card-hover: rgba(51, 65, 85, 0.9);
+  --bg-overlay: rgba(15, 23, 42, 0.75);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+
+  --accent-primary: #38bdf8;
+  --accent-secondary: #818cf8;
+  --accent-hover: #0284c7;
+  --accent-glow: rgba(56, 189, 248, 0.25);
+
+  --success-color: #34d399;
+  --success-bg: rgba(52, 211, 153, 0.15);
+  --warning-color: #fbbf24;
+  --warning-bg: rgba(251, 191, 36, 0.15);
+  --info-color: #60a5fa;
+  --info-bg: rgba(96, 165, 250, 0.15);
+
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-focus: #38bdf8;
+  --focus-outline-width: 3px;
+  --focus-outline-offset: 3px;
+
+  /* Visual Aid Variables */
+  --ruler-bg: rgba(254, 240, 138, 0.35);
+  --ruler-border: #eab308;
+  --ruler-height: 52px;
+  --focus-mask-bg: rgba(0, 0, 0, 0.65);
+  --tts-highlight-bg: #fde047;
+  --tts-highlight-text: #020617;
+
+  /* UI Tokens */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 24px var(--accent-glow);
+
+  --transition-speed: 0.25s;
+  --transition-fn: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Theme: Crisp Light --- */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-card-hover: #ffffff;
+  --bg-overlay: rgba(248, 250, 252, 0.8);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-inverse: #f8fafc;
+
+  --accent-primary: #0284c7;
+  --accent-secondary: #6366f1;
+  --accent-hover: #0369a1;
+  --accent-glow: rgba(2, 132, 199, 0.15);
+
+  --border-subtle: #e2e8f0;
+  --border-focus: #0284c7;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Theme: Warm Sepia / Meares-Irlen Tint (Reduces Visual Stress / Glare) --- */
+[data-theme="sepia"] {
+  --bg-primary: #fbf0d9;
+  --bg-secondary: #f4e4bc;
+  --bg-tertiary: #ebd7a3;
+  --bg-card: #f8ebd0;
+  --bg-card-hover: #fcf4e3;
+  --bg-overlay: rgba(251, 240, 217, 0.85);
+
+  --text-primary: #2d261e;
+  --text-secondary: #4a3f32;
+  --text-muted: #736452;
+  --text-inverse: #fbf0d9;
+
+  --accent-primary: #965318;
+  --accent-secondary: #794212;
+  --accent-hover: #67370e;
+  --accent-glow: rgba(150, 83, 24, 0.15);
+
+  --border-subtle: #dfcca0;
+  --border-focus: #965318;
+  --ruler-bg: rgba(150, 83, 24, 0.2);
+  --ruler-border: #965318;
+}
+
+/* --- Theme: Pastel Calming Green / Low Sensory Mode --- */
+[data-theme="calm-green"] {
+  --bg-primary: #ecfdf5;
+  --bg-secondary: #d1fae5;
+  --bg-tertiary: #a7f3d0;
+  --bg-card: rgba(209, 250, 229, 0.85);
+  --bg-card-hover: #e6fffa;
+  --bg-overlay: rgba(236, 253, 245, 0.85);
+
+  --text-primary: #064e3b;
+  --text-secondary: #065f46;
+  --text-muted: #047857;
+  --text-inverse: #ecfdf5;
+
+  --accent-primary: #059669;
+  --accent-secondary: #0d9488;
+  --accent-hover: #047857;
+  --accent-glow: rgba(5, 150, 105, 0.2);
+
+  --border-subtle: #a7f3d0;
+  --border-focus: #059669;
+}
+
+/* --- Theme: Pastel Calming Blue / Serenity Mode --- */
+[data-theme="calm-blue"] {
+  --bg-primary: #f0f9ff;
+  --bg-secondary: #e0f2fe;
+  --bg-tertiary: #bae6fd;
+  --bg-card: rgba(224, 242, 254, 0.85);
+  --bg-card-hover: #eaf6fe;
+  --bg-overlay: rgba(240, 249, 255, 0.85);
+
+  --text-primary: #0c4a6e;
+  --text-secondary: #0369a1;
+  --text-muted: #0284c7;
+  --text-inverse: #f0f9ff;
+
+  --accent-primary: #0284c7;
+  --accent-secondary: #3b82f6;
+  --accent-hover: #0369a1;
+  --accent-glow: rgba(2, 132, 199, 0.2);
+
+  --border-subtle: #bae6fd;
+  --border-focus: #0284c7;
+}
+
+/* --- Theme: High-Contrast Monochromatic (WCAG AAA 7:1+) --- */
+[data-theme="high-contrast"] {
+  --bg-primary: #000000;
+  --bg-secondary: #000000;
+  --bg-tertiary: #18181b;
+  --bg-card: #000000;
+  --bg-card-hover: #18181b;
+  --bg-overlay: rgba(0, 0, 0, 0.95);
+
+  --text-primary: #ffffff;
+  --text-secondary: #ffff55;
+  --text-muted: #e4e4e7;
+  --text-inverse: #000000;
+
+  --accent-primary: #ffff00;
+  --accent-secondary: #00ffff;
+  --accent-hover: #fef08a;
+  --accent-glow: rgba(255, 255, 0, 0.4);
+
+  --border-subtle: #ffffff;
+  --border-focus: #ffff00;
+  --focus-outline-width: 4px;
+}
+
+/* --- Base Layout & Normalization --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--base-font-size);
+  line-height: var(--font-line-height);
+  letter-spacing: var(--font-letter-spacing);
+  word-spacing: var(--font-word-spacing);
+  font-family: var(--font-family-base);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color var(--transition-speed) var(--transition-fn),
+              color var(--transition-speed) var(--transition-fn);
+}
+
+/* Font classes */
+body[data-font="opendyslexic"] {
+  font-family: var(--font-family-opendyslexic);
+}
+
+body[data-font="atkinson"] {
+  font-family: var(--font-family-atkinson);
+}
+
+body[data-font="sans"] {
+  font-family: var(--font-family-sans);
+}
+
+body[data-font="lexend"] {
+  font-family: var(--font-family-base);
+}
+
+/* Accessible Focus Rings */
+:focus-visible {
+  outline: var(--focus-outline-width) solid var(--border-focus) !important;
+  outline-offset: var(--focus-outline-offset) !important;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 4px var(--accent-glow) !important;
+}
+
+/* Skip to main content link (WCAG 2.4.1) */
+.skip-link {
+  position: absolute;
+  top: -80px;
+  left: 20px;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  padding: 12px 24px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  z-index: 10000;
+  transition: top 0.2s ease-in-out;
+  text-decoration: none;
+  box-shadow: var(--shadow-lg);
+}
+
+.skip-link:focus {
+  top: 20px;
+}
+
+/* Live region for screen reader announcements */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body.reduced-motion *, body.reduced-motion *::before, body.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
