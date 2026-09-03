@@ -33,7 +33,12 @@
         this.selectedTier = document.getElementById('tier-select')?.value || 'elementary';
         this.selectedSubject = document.getElementById('subject-select')?.value || 'all';
         const nameVal = document.getElementById('student-name-input')?.value.trim();
-        if (nameVal) this.studentName = nameVal;
+        if (nameVal) {
+          this.studentName = nameVal;
+          localStorage.setItem('hestens_student_name', nameVal);
+          const headerName = document.getElementById('header-user-name');
+          if (headerName) headerName.textContent = nameVal;
+        }
 
         this.loadQuestions();
         if (this.currentQuestions.length === 0) {

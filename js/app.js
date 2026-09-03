@@ -25,11 +25,17 @@
     init() {
       this.bindA11yFAB();
       this.bindGradeFilterTabs();
-      this.bindNotesDrawer();
-      this.bindFocusTimer();
       this.bindModals();
-      this.bindVoiceRecognition();
       this.bindTTSControls();
+      this.syncUserName();
+    }
+
+    syncUserName() {
+      const savedName = localStorage.getItem('hestens_student_name');
+      const nameEl = document.getElementById('header-user-name');
+      if (nameEl && savedName) {
+        nameEl.textContent = savedName;
+      }
     }
 
     // --- Accessibility Floating Action Button (FAB) & Drawer ---
@@ -126,10 +132,6 @@
 
       document.getElementById('tts-speed-select')?.addEventListener('change', (e) => {
         this.a11y.prefs.speechRate = parseFloat(e.target.value);
-      });
-
-      document.getElementById('exit-zen-btn')?.addEventListener('click', () => {
-        this.a11y.setZenMode(false);
       });
     }
 

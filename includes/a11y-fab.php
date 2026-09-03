@@ -182,44 +182,6 @@
   </div>
 </section>
 
-<!-- Learning Notes Drawer -->
-<aside id="notes-drawer" class="notes-drawer" aria-labelledby="notes-heading" role="complementary">
-  <div class="drawer-header">
-    <div id="notes-heading" class="drawer-title">
-      <span aria-hidden="true">📝</span> My Learning Notes
-    </div>
-    <button id="close-notes-btn" class="btn btn-secondary btn-icon-only" aria-label="Close Notes Drawer">
-      ✕
-    </button>
-  </div>
-  <div class="notes-editor">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <button id="voice-dictate-btn" class="btn btn-secondary" aria-label="Dictate thoughts with your voice (Speech to Text)">
-        <span>🎙️</span> <span>Dictate (Voice)</span>
-      </button>
-      <div id="voice-status-indicator" class="voice-recording-status" style="display:none;">
-        <div class="voice-pulsing-dot"></div>
-        <span>Listening...</span>
-      </div>
-    </div>
-    <textarea id="notes-textarea" class="notes-textarea" placeholder="Jot down questions, key takeaways, or voice thoughts. Notes save automatically to your browser..."></textarea>
-    <span style="font-size: 0.8rem; color: var(--text-muted);">💾 Notes automatically save to your local browser storage.</span>
-  </div>
-</aside>
-
-<!-- Floating Focus Pomodoro Timer -->
-<aside id="focus-timer-widget" class="focus-timer-floating" aria-labelledby="timer-heading" role="complementary">
-  <div style="display: flex; justify-content: space-between; align-items: center;">
-    <strong id="timer-heading" style="font-size: 0.95rem;">⏱️ Focus Session</strong>
-    <button class="btn btn-secondary btn-icon-only" style="min-width:32px; min-height:32px; padding:0;" onclick="document.getElementById('focus-timer-widget').classList.remove('active')" aria-label="Close Timer">✕</button>
-  </div>
-  <div id="timer-display-text" class="timer-display">25:00</div>
-  <div class="timer-controls">
-    <button id="timer-start-pause-btn" class="btn btn-primary" style="font-size:0.85rem; padding:0.4rem 0.8rem;">▶ Start Focus</button>
-    <button id="timer-reset-btn" class="btn btn-secondary" style="font-size:0.85rem; padding:0.4rem 0.8rem;">Reset</button>
-  </div>
-</aside>
-
 <!-- Keyboard Shortcuts Modal -->
 <div id="shortcuts-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="shortcuts-modal-title">
   <div class="modal-content">
