@@ -61,55 +61,160 @@ include __DIR__ . '/includes/header.php';
 <section class="grades-section" aria-labelledby="grades-heading">
   <div class="section-header">
     <div>
-      <h2 id="grades-heading" class="section-title">Select Your Grade Level</h2>
+      <h2 id="grades-heading" class="section-title">Explore Curriculum by Learning Tier</h2>
       <p style="color:var(--text-secondary); margin-top:0.25rem;">
-        Each grade includes full curricula for <strong>Math</strong>, <strong>ELA (Reading)</strong>, <strong>Science</strong>, and <strong>Social Studies</strong>.
+        Complete multi-sensory curriculum for <strong>Math</strong>, <strong>ELA</strong>, <strong>Science</strong>, and <strong>Social Studies</strong> across all grade levels.
       </p>
     </div>
 
     <!-- Tier Filter Tabs -->
     <div class="filter-tabs" role="tablist" aria-label="Filter grade levels">
-      <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All Grades</button>
-      <button class="filter-tab" data-filter="early" role="tab" aria-selected="false">Early (Pre-K - K)</button>
-      <button class="filter-tab" data-filter="elementary" role="tab" aria-selected="false">Elementary (1st - 5th)</button>
-      <button class="filter-tab" data-filter="middle" role="tab" aria-selected="false">Middle (6th - 8th)</button>
+      <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All Tiers</button>
+      <button class="filter-tab" data-filter="elementary" role="tab" aria-selected="false">Elementary (Pre-K - 5th)</button>
+      <button class="filter-tab" data-filter="middle" role="tab" aria-selected="false">Middle School (6th - 8th)</button>
       <button class="filter-tab" data-filter="high" role="tab" aria-selected="false">High School (9th - 12th)</button>
     </div>
   </div>
 
-  <!-- 14 Grade Cards Grid (Pre-K to 12th) -->
-  <div class="grade-cards-grid" id="grade-cards-container">
-    <?php foreach ($allGrades as $gradeId => $grade): ?>
-      <article class="grade-card" data-tier="<?= htmlspecialchars($grade['tier']) ?>" aria-labelledby="card-title-<?= $gradeId ?>">
-        <div class="grade-card-header">
-          <div class="grade-badge-row">
-            <span class="grade-pill"><?= ucfirst($grade['tier']) ?> Tier</span>
-            <span class="grade-pill">4 Core Subjects</span>
-          </div>
-          <div class="grade-icon-large"><?= $grade['icon'] ?></div>
-          <h3 id="card-title-<?= $gradeId ?>" class="grade-card-title"><?= htmlspecialchars($grade['title']) ?></h3>
-          <p class="grade-card-subtitle"><?= htmlspecialchars($grade['fullName']) ?></p>
-        </div>
+  <!-- CLUSTER 1: Elementary School (Pre-K to 5th) -->
+  <div class="tier-cluster-block tier-elementary-cluster" data-tier-cluster="elementary">
+    <div class="tier-cluster-header aurora-mesh-elementary">
+      <div class="tier-cluster-icon">🎒</div>
+      <div class="tier-cluster-info">
+        <span class="cluster-badge">Foundational Tier</span>
+        <h3 class="tier-cluster-title">Early & Elementary Learning (Pre-K – 5th Grade)</h3>
+        <p class="tier-cluster-desc">Sensory counting, phonemic awareness, visual arithmetic, place values, and discovery science.</p>
+      </div>
+    </div>
+    <div class="grade-cards-grid">
+      <?php foreach ($allGrades as $gradeId => $grade): ?>
+        <?php if ($grade['tier'] === 'early' || $grade['tier'] === 'elementary'): ?>
+          <article class="grade-card tier-elementary" data-tier="elementary" aria-labelledby="card-title-<?= $gradeId ?>">
+            <div class="grade-card-header aurora-card-elementary">
+              <div class="grade-badge-row">
+                <span class="grade-pill"><?= htmlspecialchars($grade['title']) ?></span>
+                <span class="grade-pill">4 Core Subjects</span>
+              </div>
+              <div class="grade-icon-large"><?= $grade['icon'] ?></div>
+              <h4 id="card-title-<?= $gradeId ?>" class="grade-card-title"><?= htmlspecialchars($grade['title']) ?></h4>
+              <p class="grade-card-subtitle"><?= htmlspecialchars($grade['fullName']) ?></p>
+            </div>
 
-        <div class="grade-card-body">
-          <p class="grade-card-desc"><?= htmlspecialchars($grade['description']) ?></p>
-          
-          <div class="grade-subjects-preview">
-            <?php foreach ($grade['subjects'] as $subKey => $sub): ?>
-              <span class="subject-mini-chip" title="<?= htmlspecialchars($sub['title']) ?>">
-                <?= $sub['icon'] ?> <?= htmlspecialchars($sub['title']) ?>
-              </span>
-            <?php endforeach; ?>
-          </div>
+            <div class="grade-card-body">
+              <p class="grade-card-desc"><?= htmlspecialchars($grade['description']) ?></p>
+              
+              <div class="grade-subjects-preview">
+                <?php foreach ($grade['subjects'] as $subKey => $sub): ?>
+                  <span class="subject-mini-chip" title="<?= htmlspecialchars($sub['title']) ?>">
+                    <?= $sub['icon'] ?> <?= htmlspecialchars($sub['title']) ?>
+                  </span>
+                <?php endforeach; ?>
+              </div>
 
-          <div class="grade-card-footer">
-            <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary grade-launch-btn" aria-label="Open <?= htmlspecialchars($grade['title']) ?> Curriculum">
-              Explore <?= htmlspecialchars($grade['title']) ?> ➔
-            </a>
-          </div>
-        </div>
-      </article>
-    <?php endforeach; ?>
+              <div class="grade-card-footer">
+                <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary grade-launch-btn" aria-label="Open <?= htmlspecialchars($grade['title']) ?> Curriculum">
+                  Explore <?= htmlspecialchars($grade['title']) ?> ➔
+                </a>
+              </div>
+            </div>
+          </article>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+  </div>
+
+  <!-- CLUSTER 2: Middle School (6th to 8th) -->
+  <div class="tier-cluster-block tier-middle-cluster" data-tier-cluster="middle" style="margin-top: 3rem;">
+    <div class="tier-cluster-header aurora-mesh-middle">
+      <div class="tier-cluster-icon">🔬</div>
+      <div class="tier-cluster-info">
+        <span class="cluster-badge" style="background:rgba(245,158,11,0.25); color:#f59e0b;">Intermediate Tier</span>
+        <h3 class="tier-cluster-title">Middle School Curriculum (6th – 8th Grade)</h3>
+        <p class="tier-cluster-desc">Pre-algebra visual models, literary themes, genetics, cells, chemistry basics, and constitutional civics.</p>
+      </div>
+    </div>
+    <div class="grade-cards-grid">
+      <?php foreach ($allGrades as $gradeId => $grade): ?>
+        <?php if ($grade['tier'] === 'middle'): ?>
+          <article class="grade-card tier-middle" data-tier="middle" aria-labelledby="card-title-<?= $gradeId ?>">
+            <div class="grade-card-header aurora-card-middle">
+              <div class="grade-badge-row">
+                <span class="grade-pill"><?= htmlspecialchars($grade['title']) ?></span>
+                <span class="grade-pill">4 Core Subjects</span>
+              </div>
+              <div class="grade-icon-large"><?= $grade['icon'] ?></div>
+              <h4 id="card-title-<?= $gradeId ?>" class="grade-card-title"><?= htmlspecialchars($grade['title']) ?></h4>
+              <p class="grade-card-subtitle"><?= htmlspecialchars($grade['fullName']) ?></p>
+            </div>
+
+            <div class="grade-card-body">
+              <p class="grade-card-desc"><?= htmlspecialchars($grade['description']) ?></p>
+              
+              <div class="grade-subjects-preview">
+                <?php foreach ($grade['subjects'] as $subKey => $sub): ?>
+                  <span class="subject-mini-chip" title="<?= htmlspecialchars($sub['title']) ?>">
+                    <?= $sub['icon'] ?> <?= htmlspecialchars($sub['title']) ?>
+                  </span>
+                <?php endforeach; ?>
+              </div>
+
+              <div class="grade-card-footer">
+                <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary grade-launch-btn" aria-label="Open <?= htmlspecialchars($grade['title']) ?> Curriculum">
+                  Explore <?= htmlspecialchars($grade['title']) ?> ➔
+                </a>
+              </div>
+            </div>
+          </article>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+  </div>
+
+  <!-- CLUSTER 3: High School (9th to 12th) -->
+  <div class="tier-cluster-block tier-high-cluster" data-tier-cluster="high" style="margin-top: 3rem;">
+    <div class="tier-cluster-header aurora-mesh-high">
+      <div class="tier-cluster-icon">🎓</div>
+      <div class="tier-cluster-info">
+        <span class="cluster-badge" style="background:rgba(99,102,241,0.25); color:#818cf8;">Advanced Tier</span>
+        <h3 class="tier-cluster-title">High School Curriculum (9th – 12th Grade)</h3>
+        <p class="tier-cluster-desc">Practical financial mastery, algebra & geometry, astrophysics, rhetoric, ecology, and modern economics.</p>
+      </div>
+    </div>
+    <div class="grade-cards-grid">
+      <?php foreach ($allGrades as $gradeId => $grade): ?>
+        <?php if ($grade['tier'] === 'high'): ?>
+          <article class="grade-card tier-high" data-tier="high" aria-labelledby="card-title-<?= $gradeId ?>">
+            <div class="grade-card-header aurora-card-high">
+              <div class="grade-badge-row">
+                <span class="grade-pill"><?= htmlspecialchars($grade['title']) ?></span>
+                <span class="grade-pill">4 Core Subjects</span>
+              </div>
+              <div class="grade-icon-large"><?= $grade['icon'] ?></div>
+              <h4 id="card-title-<?= $gradeId ?>" class="grade-card-title"><?= htmlspecialchars($grade['title']) ?></h4>
+              <p class="grade-card-subtitle"><?= htmlspecialchars($grade['fullName']) ?></p>
+            </div>
+
+            <div class="grade-card-body">
+              <p class="grade-card-desc"><?= htmlspecialchars($grade['description']) ?></p>
+              
+              <div class="grade-subjects-preview">
+                <?php foreach ($grade['subjects'] as $subKey => $sub): ?>
+                  <span class="subject-mini-chip" title="<?= htmlspecialchars($sub['title']) ?>">
+                    <?= $sub['icon'] ?> <?= htmlspecialchars($sub['title']) ?>
+                  </span>
+                <?php endforeach; ?>
+              </div>
+
+              <div class="grade-card-footer">
+                <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary grade-launch-btn" aria-label="Open <?= htmlspecialchars($grade['title']) ?> Curriculum">
+                  Explore <?= htmlspecialchars($grade['title']) ?> ➔
+                </a>
+              </div>
+            </div>
+          </article>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
   </div>
 </section>
 

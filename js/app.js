@@ -96,9 +96,9 @@
     // --- Grade Cards Tier Filter (index.php) ---
     bindGradeFilterTabs() {
       const filterTabs = document.querySelectorAll('.filter-tab');
-      const cards = document.querySelectorAll('.grade-card');
+      const clusters = document.querySelectorAll('.tier-cluster-block');
 
-      if (filterTabs.length === 0 || cards.length === 0) return;
+      if (filterTabs.length === 0 || clusters.length === 0) return;
 
       filterTabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -111,11 +111,11 @@
           tab.classList.add('active');
           tab.setAttribute('aria-selected', 'true');
 
-          cards.forEach(card => {
-            if (filter === 'all' || card.dataset.tier === filter) {
-              card.style.display = 'flex';
+          clusters.forEach(cluster => {
+            if (filter === 'all' || cluster.dataset.tierCluster === filter) {
+              cluster.style.display = 'block';
             } else {
-              card.style.display = 'none';
+              cluster.style.display = 'none';
             }
           });
 

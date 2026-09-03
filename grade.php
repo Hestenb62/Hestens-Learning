@@ -31,13 +31,18 @@ include __DIR__ . '/includes/header.php';
   <span aria-current="page"><?= htmlspecialchars($grade['title']) ?></span>
 </nav>
 
-<!-- Grade Header Hero -->
-<section class="grade-hero-banner" aria-labelledby="grade-page-title">
+<!-- Grade Header Hero with Aurora Mesh -->
+<?php 
+  $tierMeshClass = ($grade['tier'] === 'early' || $grade['tier'] === 'elementary') ? 'aurora-mesh-elementary' : 'aurora-mesh-' . htmlspecialchars($grade['tier']); 
+?>
+<section class="grade-hero-banner <?= $tierMeshClass ?>" aria-labelledby="grade-page-title">
   <div class="grade-hero-icon"><?= $grade['icon'] ?></div>
   <div class="grade-hero-content">
-    <div class="hero-badge"><?= ucfirst($grade['tier']) ?> Learning Tier</div>
-    <h1 id="grade-page-title" class="grade-hero-title"><?= htmlspecialchars($grade['fullName']) ?></h1>
-    <p class="grade-hero-desc"><?= htmlspecialchars($grade['description']) ?></p>
+    <div class="hero-badge" style="background:rgba(0,0,0,0.3); color:#ffffff; border:1px solid rgba(255,255,255,0.2);">
+      <?= ucfirst($grade['tier']) ?> Learning Tier
+    </div>
+    <h1 id="grade-page-title" class="grade-hero-title" style="color:#ffffff;"><?= htmlspecialchars($grade['fullName']) ?></h1>
+    <p class="grade-hero-desc" style="color:rgba(255,255,255,0.9);"><?= htmlspecialchars($grade['description']) ?></p>
   </div>
 </section>
 
