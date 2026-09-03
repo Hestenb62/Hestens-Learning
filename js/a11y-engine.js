@@ -1,7 +1,7 @@
 /**
- * Hestens Learning - Accessibility Engine (a11y-engine.js)
- * Implements OpenDyslexic integration, Bionic Reading, Reading Ruler,
- * TTS Karaoke Narrator, Contrast/Irlen Tints, Web Audio feedback & Keyboard navigation.
+ * Hestens Learning - Accessibility Engine (js/a11y-engine.js)
+ * Manages OpenDyslexic, Bionic Reading, Reading Ruler, FAB drawer,
+ * Contrast & Irlen Tints, Web Speech TTS & Web Audio feedback.
  */
 
 export class A11yEngine {
@@ -51,6 +51,9 @@ export class A11yEngine {
   savePreferences() {
     try {
       localStorage.setItem('hestens_a11y_prefs', JSON.stringify(this.prefs));
+      // Also sync key preferences to cookies for PHP initial SSR
+      document.cookie = `hestens_theme=${this.prefs.theme}; path=/; max-age=31536000; SameSite=Lax`;
+      document.cookie = `hestens_font=${this.prefs.fontFamily}; path=/; max-age=31536000; SameSite=Lax`;
     } catch (e) {
       console.warn('Could not save a11y preferences', e);
     }
@@ -109,8 +112,8 @@ export class A11yEngine {
 
       const now = this.audioCtx.currentTime;
       if (type === 'success') {
-        osc.frequency.setValueAtTime(440, now); // A4
-        osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
         gain.gain.setValueAtTime(0.12, now);
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
         osc.start(now);
@@ -122,7 +125,6 @@ export class A11yEngine {
         osc.start(now);
         osc.stop(now + 0.08);
       } else if (type === 'celebrate') {
-        // Multi-tone chime
         [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
           const subOsc = this.audioCtx.createOscillator();
           const subGain = this.audioCtx.createGain();
@@ -136,7 +138,7 @@ export class A11yEngine {
         });
       }
     } catch (err) {
-      console.warn('Web Audio playback error', err);
+      console.warn('Audio feedback error', err);
     }
   }
 
@@ -149,7 +151,7 @@ export class A11yEngine {
   }
 
   bindEvents() {
-    // Pointer tracking for reading ruler & focus mask
+    // Tracking for reading ruler & focus mask
     window.addEventListener('pointermove', (e) => {
       if (this.prefs.readingRuler && this.rulerEl) {
         const topPos = e.clientY - (this.prefs.rulerHeight / 2);
@@ -162,7 +164,6 @@ export class A11yEngine {
 
     // Global Hotkeys
     window.addEventListener('keydown', (e) => {
-      // Ignore when inside input/textarea
       if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
         return;
       }
@@ -188,7 +189,7 @@ export class A11yEngine {
     });
   }
 
-  // --- Preference Setters ---
+  // --- Setters ---
   setTheme(themeName) {
     this.prefs.theme = themeName;
     if (themeName === 'dark') {
@@ -197,7 +198,7 @@ export class A11yEngine {
       document.documentElement.setAttribute('data-theme', themeName);
     }
     this.savePreferences();
-    this.announce(`Theme changed to ${themeName}`);
+    this.announce(`Theme set to ${themeName}`);
   }
 
   setFont(fontName) {
@@ -275,7 +276,7 @@ export class A11yEngine {
     this.prefs.zenMode = !!active;
     document.body.classList.toggle('zen-mode', this.prefs.zenMode);
     this.savePreferences();
-    this.announce(this.prefs.zenMode ? 'Zen distraction-free mode enabled' : 'Zen mode exited');
+    this.announce(this.prefs.zenMode ? 'Zen mode enabled' : 'Zen mode exited');
   }
 
   applyAllPreferences() {
@@ -290,13 +291,36 @@ export class A11yEngine {
     this.setFocusMask(this.prefs.focusMask);
     this.setReducedMotion(this.prefs.reducedMotion);
     this.setZenMode(this.prefs.zenMode);
+
+    // Sync drawer UI elements with current preferences
+    const bionicToggle = document.getElementById('toggle-bionic');
+    if (bionicToggle) bionicToggle.checked = this.prefs.bionicReading;
+
+    const rulerToggle = document.getElementById('toggle-ruler');
+    if (rulerToggle) rulerToggle.checked = this.prefs.readingRuler;
+
+    const maskToggle = document.getElementById('toggle-mask');
+    if (maskToggle) maskToggle.checked = this.prefs.focusMask;
+
+    const motionToggle = document.getElementById('toggle-motion');
+    if (motionToggle) motionToggle.checked = this.prefs.reducedMotion;
+
+    const soundToggle = document.getElementById('toggle-sound');
+    if (soundToggle) soundToggle.checked = this.prefs.soundEffects;
+
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.theme === this.prefs.theme);
+    });
+
+    document.querySelectorAll('.font-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.font === this.prefs.fontFamily);
+    });
   }
 
-  // --- Bionic Reading Transformer ---
+  // --- Bionic Transformer ---
   formatBionic(text) {
     return text.split(/\s+/).map(word => {
       if (!word) return '';
-      // Exclude special characters & short words
       const cleanLen = word.replace(/[^a-zA-Z0-9]/g, '').length;
       if (cleanLen <= 1) return word;
       const splitIndex = Math.ceil(cleanLen * 0.45);
@@ -314,7 +338,6 @@ export class A11yEngine {
       }
 
       if (this.prefs.bionicReading) {
-        // Parse text nodes only so we don't break child HTML elements/tags
         const temp = document.createElement('div');
         temp.innerHTML = el.dataset.originalHtml;
         this.transformTextNodesToBionic(temp);
@@ -333,7 +356,6 @@ export class A11yEngine {
         node.parentNode.replaceChild(span, node);
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      // Don't modify script/style or already processed items
       if (!['SCRIPT', 'STYLE', 'BUTTON'].includes(node.tagName)) {
         Array.from(node.childNodes).forEach(child => this.transformTextNodesToBionic(child));
       }
@@ -349,7 +371,6 @@ export class A11yEngine {
 
     this.stopTTS();
 
-    // Prepare container words with spans for karaoke sync if container provided
     if (containerEl) {
       this.wrapWordsWithSpans(containerEl);
     }
@@ -358,14 +379,12 @@ export class A11yEngine {
     this.speechUtterance.rate = this.prefs.speechRate;
     this.speechUtterance.pitch = this.prefs.speechPitch;
 
-    let wordIndex = 0;
     const wordSpans = containerEl ? containerEl.querySelectorAll('.tts-word-span') : [];
 
     this.speechUtterance.onboundary = (event) => {
       if (event.name === 'word') {
         if (wordSpans.length > 0) {
           wordSpans.forEach(s => s.classList.remove('tts-current-word'));
-          // Find closest word span matching character index
           let currentSpan = null;
           for (let span of wordSpans) {
             const charIdx = parseInt(span.dataset.charIndex, 10);
@@ -389,7 +408,6 @@ export class A11yEngine {
         wordSpans.forEach(s => s.classList.remove('tts-current-word'));
       }
       this.updateTTSButtonUI(false);
-      this.announce('Finished reading lesson');
     };
 
     this.speechUtterance.onerror = () => {
@@ -401,11 +419,10 @@ export class A11yEngine {
     this.isSpeaking = true;
     this.updateTTSButtonUI(true);
     this.playChime('click');
-    this.announce('Reading lesson aloud');
   }
 
   wrapWordsWithSpans(container) {
-    const paragraphs = container.querySelectorAll('p, li, h2, h3, h4');
+    const paragraphs = container.querySelectorAll('p, li, h1, h2, h3, h4');
     let globalCharIndex = 0;
     paragraphs.forEach(p => {
       const words = p.innerText.split(/(\s+)/);
@@ -459,14 +476,18 @@ export class A11yEngine {
   toggleDrawer() {
     const drawer = document.getElementById('a11y-drawer');
     const backdrop = document.getElementById('drawer-backdrop');
+    const fabBtn = document.getElementById('a11y-fab-trigger');
+
     if (drawer && backdrop) {
       const isOpen = drawer.classList.contains('open');
       drawer.classList.toggle('open', !isOpen);
       backdrop.classList.toggle('open', !isOpen);
+      if (fabBtn) fabBtn.setAttribute('aria-expanded', (!isOpen).toString());
+
       if (!isOpen) {
         const firstFocus = drawer.querySelector('button, input');
         if (firstFocus) firstFocus.focus();
-        this.announce('Accessibility settings drawer opened');
+        this.announce('Accommodations drawer opened');
       }
     }
   }

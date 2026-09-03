@@ -1,0 +1,602 @@
+{
+  "grades": {
+    "pre-k": {
+      "id": "pre-k",
+      "title": "Pre-K",
+      "fullName": "Pre-Kindergarten (Ages 3-4)",
+      "tier": "early",
+      "icon": "🌱",
+      "color": "from-emerald-500 to-teal-700",
+      "description": "Foundational sensory learning, phonemic awareness, visual patterns, and counting through play.",
+      "subjects": {
+        "math": {
+          "title": "Early Math & Patterns",
+          "icon": "🔢",
+          "description": "Counting 1 to 10, recognizing shapes, and sorting by color and size.",
+          "lessons": [
+            {
+              "id": "prek-math-1",
+              "title": "1. Counting Colorful Shapes (1 to 5)",
+              "badge": "Early Counting",
+              "time": "5 min",
+              "audioScript": "Let's count together! One bright sun, two blue birds, three green apples, four red stars, and five friendly puppies.",
+              "summary": "We count objects by pointing to each one and saying the numbers in order: 1, 2, 3, 4, 5!",
+              "contentHtml": "<p>Counting is like singing a song where every number has its special turn!</p><p>When we count, we touch or point to one item at a time. Let's count our fingers: <strong>1, 2, 3, 4, 5!</strong></p>",
+              "widgetType": "math-counter-simple",
+              "flashcards": [
+                { "front": "How many fingers on one hand? 🖐️", "back": "5 fingers!" },
+                { "front": "What number comes after 2? 🔢", "back": "3!" }
+              ],
+              "quiz": {
+                "question": "How many stars do you see: ⭐ ⭐ ⭐ ?",
+                "options": [
+                  { "text": "3 Stars", "correct": true, "feedback": "Great job! 1, 2, 3 stars!" },
+                  { "text": "2 Stars", "correct": false, "feedback": "Let's count again together: 1, 2, 3!" }
+                ]
+              }
+            }
+          ]
+        },
+        "ela": {
+          "title": "Phonics & Storytelling",
+          "icon": "📚",
+          "description": "Letter sounds, rhyming words, and interactive story listening.",
+          "lessons": [
+            {
+              "id": "prek-ela-1",
+              "title": "1. The Letter Sounds Song (A, B, C)",
+              "badge": "Phonemic Awareness",
+              "time": "5 min",
+              "audioScript": "Every letter makes a special sound. A says 'ah' like Apple. B says 'buh' like Bear. C says 'kuh' like Cat.",
+              "summary": "Letters are pictures of sounds that we use to build words.",
+              "contentHtml": "<p>Letters are magical building blocks! When we put their sounds together, we make words.</p><p>• <strong>A:</strong> Ah-ah-Apple 🍎<br>• <strong>B:</strong> Buh-buh-Bear 🐻<br>• <strong>C:</strong> Kuh-kuh-Cat 🐱</p>",
+              "widgetType": "letter-sound-player",
+              "flashcards": [
+                { "front": "What sound does the letter A make? 🍎", "back": "'Ah' like Apple!" },
+                { "front": "What sound does the letter B make? 🐻", "back": "'Buh' like Bear!" }
+              ],
+              "quiz": {
+                "question": "Which animal starts with the 'Buh' sound?",
+                "options": [
+                  { "text": "Bear 🐻", "correct": true, "feedback": "Yes! Bear starts with the letter B!" },
+                  { "text": "Cat 🐱", "correct": false, "feedback": "Cat starts with the 'Kuh' sound (C). Bear starts with B!" }
+                ]
+              }
+            }
+          ]
+        },
+        "science": {
+          "title": "Exploring Nature",
+          "icon": "🌿",
+          "description": "The five senses, weather, animals, and plant growth.",
+          "lessons": [
+            {
+              "id": "prek-sci-1",
+              "title": "1. Our 5 Senses Explorer",
+              "badge": "Sensory Science",
+              "time": "6 min",
+              "audioScript": "We explore the world with our five senses: Seeing with our eyes, hearing with our ears, smelling with our nose, tasting with our tongue, and touching with our hands.",
+              "summary": "Our 5 senses help our brain understand everything around us.",
+              "contentHtml": "<p>Your body has 5 amazing explorer tools:</p><p>👀 <strong>Sight:</strong> Seeing colors and shapes.<br>👂 <strong>Hearing:</strong> Listening to music and birds.<br>👃 <strong>Smell:</strong> Smelling flowers and cookies.<br>👅 <strong>Taste:</strong> Tasting sweet berries.<br>✋ <strong>Touch:</strong> Feeling soft blankets.</p>",
+              "widgetType": "senses-explorer",
+              "flashcards": [
+                { "front": "Which sense do we use to listen to music? 🎵", "back": "Hearing (our ears)!" },
+                { "front": "Which sense do we use to feel a fluffy puppy? 🐶", "back": "Touch (our hands)!" }
+              ],
+              "quiz": {
+                "question": "What part of your body do you use to smell a rose 🌹?",
+                "options": [
+                  { "text": "Your Nose 👃", "correct": true, "feedback": "Correct! Our nose smells lovely flowers!" },
+                  { "text": "Your Ears 👂", "correct": false, "feedback": "Ears are for listening. Our nose is for smelling!" }
+                ]
+              }
+            }
+          ]
+        },
+        "social-studies": {
+          "title": "My Family & Helpers",
+          "icon": "🤝",
+          "description": "Community helpers, feelings, sharing, and friendship.",
+          "lessons": [
+            {
+              "id": "prek-ss-1",
+              "title": "1. Community Helpers Around Us",
+              "badge": "Community",
+              "time": "5 min",
+              "audioScript": "Community helpers are friendly neighbors who help keep us safe and healthy, like firefighters, doctors, librarians, and teachers.",
+              "summary": "Community helpers work together to make our neighborhood safe and happy.",
+              "contentHtml": "<p>In every neighborhood, wonderful helpers work every day:</p><p>🚒 <strong>Firefighters:</strong> Keep our homes safe.<br>🩺 <strong>Doctors & Nurses:</strong> Help us feel better.<br>📚 <strong>Librarians:</strong> Help us find exciting books to read.</p>",
+              "widgetType": "helpers-match",
+              "flashcards": [
+                { "front": "Who drives a big red fire truck? 🚒", "back": "Firefighters!" },
+                { "front": "Who helps us learn at school? 🏫", "back": "Teachers!" }
+              ],
+              "quiz": {
+                "question": "Who helps you find books at the library?",
+                "options": [
+                  { "text": "A Librarian 📚", "correct": true, "feedback": "Yes! Librarians love helping us find great stories!" },
+                  { "text": "A Pilot ✈️", "correct": false, "feedback": "Pilots fly planes in the sky! Librarians work in libraries." }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "kindergarten": {
+      "id": "kindergarten",
+      "title": "Kindergarten",
+      "fullName": "Kindergarten (Ages 5-6)",
+      "tier": "early",
+      "icon": "🎨",
+      "color": "from-cyan-500 to-blue-700",
+      "description": "Early sight words, basic addition with visual objects, plant lifecycles, and community geography.",
+      "subjects": {
+        "math": {
+          "title": "Math & Visual Adding",
+          "icon": "➕",
+          "description": "Adding with pictures, 2D and 3D shapes, and counting to 20.",
+          "lessons": [
+            {
+              "id": "k-math-1",
+              "title": "1. Adding with Visual Apples (1 + 2 = 3)",
+              "badge": "Hands-On Math",
+              "time": "7 min",
+              "audioScript": "If you have 1 red apple in your basket and a friend gives you 2 more apples, how many apples do you have altogether? Let's count: 1... 2, 3! That is addition.",
+              "summary": "Addition means putting groups together to make a bigger total.",
+              "contentHtml": "<p>Addition is joining groups together. We use the <strong>plus sign (+)</strong> to mean 'add together', and the <strong>equals sign (=)</strong> to show the total.</p><p>🍎 + 🍎 🍎 = 🍎 🍎 🍎 (1 + 2 = 3)</p>",
+              "widgetType": "apple-addition-widget",
+              "flashcards": [
+                { "front": "What does the + sign mean?", "back": "Plus (add together)!" },
+                { "front": "What is 2 + 2?", "back": "4!" }
+              ],
+              "quiz": {
+                "question": "If you have 2 toy cars and get 1 more car, how many do you have?",
+                "options": [
+                  { "text": "3 Cars", "correct": true, "feedback": "Awesome! 2 + 1 = 3 cars!" },
+                  { "text": "5 Cars", "correct": false, "feedback": "Let's count: 2 cars plus 1 more is 3 cars!" }
+                ]
+              }
+            }
+          ]
+        },
+        "ela": {
+          "title": "Sight Words & Early Reading",
+          "icon": "📖",
+          "description": "Dyslexia-friendly high-frequency sight words and sentence building.",
+          "lessons": [
+            {
+              "id": "k-ela-1",
+              "title": "1. Friendly Sight Words: THE, AND, IS",
+              "badge": "Sight Words",
+              "time": "6 min",
+              "audioScript": "Sight words are words that appear everywhere in books. The more we recognize their shapes, the smoother our reading becomes.",
+              "summary": "Sight words are common words like 'the', 'and', 'is' that we practice recognizing quickly.",
+              "contentHtml": "<p>Here are 3 super-words you will see in almost every story:</p><p>• <strong>THE:</strong> 'The cat sat.'<br>• <strong>AND:</strong> 'Apples and bananas.'<br>• <strong>IS:</strong> 'The sun is warm.'</p>",
+              "widgetType": "sight-word-builder",
+              "flashcards": [
+                { "front": "Spell 'THE'", "back": "T - H - E" },
+                { "front": "Spell 'AND'", "back": "A - N - D" }
+              ],
+              "quiz": {
+                "question": "Complete the sentence: 'The sun ___ bright.'",
+                "options": [
+                  { "text": "is", "correct": true, "feedback": "Perfect! 'The sun is bright.'" },
+                  { "text": "and", "correct": false, "feedback": "Try 'is' -> 'The sun is bright.'" }
+                ]
+              }
+            }
+          ]
+        },
+        "science": {
+          "title": "Plant Life & Sunlight",
+          "icon": "🌻",
+          "description": "Seeds, water, sunlight, and the four seasons.",
+          "lessons": [
+            {
+              "id": "k-sci-1",
+              "title": "1. How a Tiny Seed Grows",
+              "badge": "Life Cycles",
+              "time": "6 min",
+              "audioScript": "A seed sleeps in the soil. When it gets warm sunlight and gentle water, it sprouts roots downward and green leaves upward toward the sky.",
+              "summary": "Plants need soil, water, and warm sunshine to grow strong.",
+              "contentHtml": "<p>Every giant sunflower begins as a tiny seed! To grow, seeds need three friendly helpers:</p><p>💧 <strong>Water:</strong> Gives the seed a drink.<br>☀️ <strong>Sunlight:</strong> Gives the leaves energy.<br>🌱 <strong>Soil & Nutrients:</strong> Gives the roots an anchor.</p>",
+              "widgetType": "plant-grow-sim",
+              "flashcards": [
+                { "front": "What 3 things do seeds need to grow?", "back": "Water, Sunlight, and Soil!" },
+                { "front": "Which part grows down into the ground?", "back": "The Roots!" }
+              ],
+              "quiz": {
+                "question": "What gives plant leaves energy from the sky?",
+                "options": [
+                  { "text": "Sunlight ☀️", "correct": true, "feedback": "Correct! Sunlight gives plants energy to make food!" },
+                  { "text": "Darkness 🌙", "correct": false, "feedback": "Plants need sunlight to grow healthy and green." }
+                ]
+              }
+            }
+          ]
+        },
+        "social-studies": {
+          "title": "Our World & Maps",
+          "icon": "🗺️",
+          "description": "Simple map symbols, continents, and caring for our planet.",
+          "lessons": [
+            {
+              "id": "k-ss-1",
+              "title": "1. What is a Map?",
+              "badge": "Geography",
+              "time": "5 min",
+              "audioScript": "A map is a bird's-eye drawing showing where places are located, like streets, parks, rivers, and mountains.",
+              "summary": "Maps show where things are from above, helping us navigate and explore.",
+              "contentHtml": "<p>Imagine you are a soaring eagle looking down from the sky. You would see roofs of houses, winding blue rivers, and green parks. That top-down view is a <strong>map</strong>!</p>",
+              "widgetType": "mini-map-explorer",
+              "flashcards": [
+                { "front": "What does blue color on a map usually represent?", "back": "Water (Oceans, Lakes, Rivers)!" },
+                { "front": "What does a map help us do?", "back": "Find places and explore directions!" }
+              ],
+              "quiz": {
+                "question": "What color represents oceans on a map?",
+                "options": [
+                  { "text": "Blue 🌊", "correct": true, "feedback": "Yes! Blue represents rivers, lakes, and oceans." },
+                  { "text": "Red 🔴", "correct": false, "feedback": "Water is shown with blue on maps." }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "1st": {
+      "id": "1st",
+      "title": "1st Grade",
+      "fullName": "1st Grade (Elementary)",
+      "tier": "elementary",
+      "icon": "🚀",
+      "color": "from-blue-500 to-indigo-700",
+      "description": "Place values (tens and ones), decoding vowel teams, animal habitats, and community rules.",
+      "subjects": {
+        "math": {
+          "title": "Math: Tens & Ones Place Values",
+          "icon": "🔟",
+          "description": "Understanding 2-digit numbers with visual 10-bars and single units.",
+          "lessons": [
+            {
+              "id": "1st-math-1",
+              "title": "1. Building Numbers with Tens and Ones",
+              "badge": "Place Value",
+              "time": "8 min",
+              "audioScript": "When we count past 9, we bundle ten single ones together into a 10-bar. So the number 14 is one group of 10 plus 4 single units.",
+              "summary": "Every 2-digit number is made of bundles of 10s and leftover 1s.",
+              "contentHtml": "<p>Numbers have homes called <strong>Place Values</strong>. The number 25 means:</p><p>• <strong>2 Tens:</strong> (10 + 10 = 20)<br>• <strong>5 Ones:</strong> (1 + 1 + 1 + 1 + 1 = 5)<br>Total = 25!</p>",
+              "widgetType": "math-place-value-widget",
+              "flashcards": [
+                { "front": "How many tens are in 30?", "back": "3 tens!" },
+                { "front": "What is 1 ten and 7 ones?", "back": "17!" }
+              ],
+              "quiz": {
+                "question": "What number is made of 2 tens and 3 ones?",
+                "options": [
+                  { "text": "23", "correct": true, "feedback": "Spot on! 2 tens (20) + 3 ones = 23." },
+                  { "text": "32", "correct": false, "feedback": "2 tens and 3 ones makes 23 (32 would be 3 tens and 2 ones)." }
+                ]
+              }
+            }
+          ]
+        },
+        "ela": {
+          "title": "ELA: Bossy E & Long Vowels",
+          "icon": "🔤",
+          "description": "The silent E rule, compound words, and reading with expression.",
+          "lessons": [
+            {
+              "id": "1st-ela-1",
+              "title": "1. The Magic Silent E Rule",
+              "badge": "Phonics & Spelling",
+              "time": "8 min",
+              "audioScript": "When the letter E sits at the end of a short word, it stays silent but tells the vowel before it to say its own name! Like 'hop' turning into 'hope'.",
+              "summary": "Magic E makes the vowel say its long name: Cap becomes Cape, Pin becomes Pine.",
+              "contentHtml": "<p>Silent E is like a quiet superhero. It does not make a sound, but gives the other vowel super strength:</p><p>• <strong>Cap</strong> (short a) ➔ <strong>Cape</strong> (long a)<br>• <strong>Kit</strong> (short i) ➔ <strong>Kite</strong> (long i)<br>• <strong>Hop</strong> (short o) ➔ <strong>Hope</strong> (long o)</p>",
+              "widgetType": "magic-e-transformer",
+              "flashcards": [
+                { "front": "What does 'Rob' become with a Magic E?", "back": "Robe!" },
+                { "front": "What does 'Hat' become with a Magic E?", "back": "Hate!" }
+              ],
+              "quiz": {
+                "question": "Add silent E to 'TUB'. What new word does it become?",
+                "options": [
+                  { "text": "TUBE", "correct": true, "feedback": "Great job! Tub becomes Tube!" },
+                  { "text": "TUBB", "correct": false, "feedback": "Add an E to the end: T-U-B-E (Tube)!" }
+                ]
+              }
+            }
+          ]
+        },
+        "science": {
+          "title": "Science: Animal Habitats",
+          "icon": "🦁",
+          "description": "Rainforests, deserts, arctic tundras, and oceans.",
+          "lessons": [
+            {
+              "id": "1st-sci-1",
+              "title": "1. Why Habitats Are Home",
+              "badge": "Ecosystems",
+              "time": "7 min",
+              "audioScript": "A habitat is a natural home where an animal finds food, fresh water, and shelter. Polar bears thrive in the icy Arctic, while camels thrive in sandy deserts.",
+              "summary": "Animals have special adaptations that fit their specific habitat.",
+              "contentHtml": "<p>Animals live where their bodies are best suited to survive:</p><p>❄️ <strong>Arctic Tundra:</strong> Thick white fur keeps polar bears warm and camouflaged in snow.<br>🏜️ <strong>Desert:</strong> Camels can store energy and walk across hot sand.<br>🌊 <strong>Ocean:</strong> Dolphins and fish use fins to glide through water.</p>",
+              "widgetType": "habitat-matcher",
+              "flashcards": [
+                { "front": "What is a Habitat?", "back": "A natural environment providing food, water, and shelter for living things." },
+                { "front": "Where does a clownfish live?", "back": "In the ocean coral reefs!" }
+              ],
+              "quiz": {
+                "question": "Which animal lives in a cold, snowy Arctic habitat?",
+                "options": [
+                  { "text": "Polar Bear 🐻‍❄️", "correct": true, "feedback": "Correct! Polar bears have thick blubber and fur for the icy Arctic." },
+                  { "text": "Desert Camel 🐪", "correct": false, "feedback": "Camels live in warm, dry deserts." }
+                ]
+              }
+            }
+          ]
+        },
+        "social-studies": {
+          "title": "Social Studies: Community & Rules",
+          "icon": "🏛️",
+          "description": "Why we have laws, fairness, and citizenship.",
+          "lessons": [
+            {
+              "id": "1st-ss-1",
+              "title": "1. Why Do We Have Rules and Laws?",
+              "badge": "Civics",
+              "time": "6 min",
+              "audioScript": "Rules help everyone stay safe and be treated fairly. Just like rules in a board game make sure everyone has fun playing together.",
+              "summary": "Rules keep us safe, protect our belongings, and ensure fairness.",
+              "contentHtml": "<p>Imagine playing a soccer game where players could use their hands, kick anywhere, and make up scores. It would be chaos!</p><p>Rules and laws exist so everyone can live, learn, and play together peacefully and safely.</p>",
+              "widgetType": "rules-fairness-widget",
+              "flashcards": [
+                { "front": "Why do schools have rules?", "back": "To keep students safe and make sure everyone can learn happily." },
+                { "front": "What does a green traffic light mean?", "back": "Go safely!" }
+              ],
+              "quiz": {
+                "question": "What is the primary reason for traffic safety rules?",
+                "options": [
+                  { "text": "To keep drivers and pedestrians safe", "correct": true, "feedback": "Exactly! Traffic rules prevent accidents and protect everyone." },
+                  { "text": "To make cars go slower for no reason", "correct": false, "feedback": "Rules are created for safety and organization." }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "2nd": {
+      "id": "2nd",
+      "title": "2nd Grade",
+      "fullName": "2nd Grade (Elementary)",
+      "tier": "elementary",
+      "icon": "🔬",
+      "color": "from-indigo-500 to-purple-700",
+      "description": "Double-digit addition, telling time, states of matter, and goods vs. services.",
+      "subjects": {
+        "math": { "title": "Math: Telling Time & Money", "icon": "⏰", "description": "Analog clock reading, counting coins, and skip counting by 5s and 10s.", "lessons": [] },
+        "ela": { "title": "ELA: Story Elements", "icon": "📚", "description": "Characters, setting, problem, and solution.", "lessons": [] },
+        "science": { "title": "Science: Solid, Liquid, Gas", "icon": "💧", "description": "States of matter and melting/freezing points.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: Goods & Services", "icon": "🛍️", "description": "Producers, consumers, and trading in our economy.", "lessons": [] }
+      }
+    },
+    "3rd": {
+      "id": "3rd",
+      "title": "3rd Grade",
+      "fullName": "3rd Grade (Elementary)",
+      "tier": "elementary",
+      "icon": "📐",
+      "color": "from-purple-500 to-pink-700",
+      "description": "Visual multiplication arrays, main idea & supporting details, gravity, and ancient civilizations.",
+      "subjects": {
+        "math": { "title": "Math: Visual Multiplication & Arrays", "icon": "✖️", "description": "Multiplication as equal groups and visual grid arrays.", "lessons": [] },
+        "ela": { "title": "ELA: Main Idea & Inference", "icon": "💡", "description": "Finding clues in text to understand the author's message.", "lessons": [] },
+        "science": { "title": "Science: Forces & Magnets", "icon": "🧲", "description": "Push and pull forces, magnetic poles, and friction.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: Ancient World Cultures", "icon": "🏺", "description": "Ancient Egypt, Mesopotamia, and early human inventions.", "lessons": [] }
+      }
+    },
+    "4th": {
+      "id": "4th",
+      "title": "4th Grade",
+      "fullName": "4th Grade (Elementary)",
+      "tier": "elementary",
+      "icon": "🌍",
+      "color": "from-pink-500 to-rose-700",
+      "description": "Fraction visual models, text structures, renewable energy, and regional geography.",
+      "subjects": {
+        "math": { "title": "Math: Visual Fractions & Decimals", "icon": "🍕", "description": "Equal parts of a whole, fraction bars, and decimals.", "lessons": [] },
+        "ela": { "title": "ELA: Nonfiction Text Structures", "icon": "📑", "description": "Cause and effect, compare and contrast, and chronological order.", "lessons": [] },
+        "science": { "title": "Science: Energy & Earthquakes", "icon": "⚡", "description": "Kinetic vs potential energy, and tectonic plates.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: State & Regional History", "icon": "🗺️", "description": "Native American nations and state development.", "lessons": [] }
+      }
+    },
+    "5th": {
+      "id": "5th",
+      "title": "5th Grade",
+      "fullName": "5th Grade (Elementary)",
+      "tier": "elementary",
+      "icon": "💡",
+      "color": "from-rose-500 to-red-700",
+      "description": "Multiplying fractions, volume & 3D geometry, solar system orbits, and early American history.",
+      "subjects": {
+        "math": { "title": "Math: 3D Volume & Fractions", "icon": "📦", "description": "Calculating volume with unit cubes and fraction operations.", "lessons": [] },
+        "ela": { "title": "ELA: Figurative Language", "icon": "🎭", "description": "Metaphors, similes, idioms, and personification.", "lessons": [] },
+        "science": { "title": "Science: The Solar System & Space", "icon": "🪐", "description": "Planetary orbits, stars, and Earth's atmosphere.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: The American Revolution", "icon": "📜", "description": "Colonial life, the Declaration of Independence, and the Constitution.", "lessons": [] }
+      }
+    },
+    "6th": {
+      "id": "6th",
+      "title": "6th Grade",
+      "fullName": "6th Grade (Middle School)",
+      "tier": "middle",
+      "icon": "🧬",
+      "color": "from-amber-500 to-orange-700",
+      "description": "Ratios & rates, argument writing, cell biology, and world geography.",
+      "subjects": {
+        "math": { "title": "Math: Ratios & Unit Rates", "icon": "📊", "description": "Visual tape diagrams, proportions, and percentage models.", "lessons": [] },
+        "ela": { "title": "ELA: Persuasive Argument Writing", "icon": "✍️", "description": "Claims, evidence, reasoning, and counterarguments.", "lessons": [] },
+        "science": { "title": "Science: Cellular Biology", "icon": "🔬", "description": "Plant vs. animal cells, organelles, and DNA basics.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: World Civilizations", "icon": "🏛️", "description": "Ancient Greece, the Roman Empire, and trade along the Silk Road.", "lessons": [] }
+      }
+    },
+    "7th": {
+      "id": "7th",
+      "title": "7th Grade",
+      "fullName": "7th Grade (Middle School)",
+      "tier": "middle",
+      "icon": "⚡",
+      "color": "from-orange-500 to-amber-700",
+      "description": "Pre-Algebra equations, literary analysis, genetics & heredity, and medieval world history.",
+      "subjects": {
+        "math": { "title": "Math: Pre-Algebra & Integers", "icon": "⚖️", "description": "Solving 2-step algebraic equations with balance scales.", "lessons": [] },
+        "ela": { "title": "ELA: Literary Themes & Symbolism", "icon": "📖", "description": "Analyzing deep themes, motifs, and author tone.", "lessons": [] },
+        "science": { "title": "Science: Genetics & Punnett Squares", "icon": "🧬", "description": "Dominant and recessive traits, heredity, and adaptation.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: Medieval & Renaissance Eras", "icon": "🏰", "description": "Feudal systems, the Renaissance, and scientific revolutions.", "lessons": [] }
+      }
+    },
+    "8th": {
+      "id": "8th",
+      "title": "8th Grade",
+      "fullName": "8th Grade (Middle School)",
+      "tier": "middle",
+      "icon": "🔭",
+      "color": "from-yellow-500 to-lime-700",
+      "description": "Linear equations (y=mx+b), research essays, chemistry & periodic table, and US government branches.",
+      "subjects": {
+        "math": { "title": "Math: Linear Functions & Slope", "icon": "📈", "description": "Graphing lines, finding slope, and y-intercepts.", "lessons": [] },
+        "ela": { "title": "ELA: Research & Evaluating Sources", "icon": "🔍", "description": "Fact vs. opinion, citing evidence, and detecting bias.", "lessons": [] },
+        "science": { "title": "Science: Chemistry & Periodic Table", "icon": "⚗️", "description": "Atoms, molecules, chemical reactions, and periodic trends.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: US Constitution & Civics", "icon": "⚖️", "description": "3 Branches of Government, Bill of Rights, and voting systems.", "lessons": [] }
+      }
+    },
+    "9th": {
+      "id": "9th",
+      "title": "9th Grade",
+      "fullName": "9th Grade / Freshman (High School)",
+      "tier": "high",
+      "icon": "💻",
+      "color": "from-emerald-600 to-teal-800",
+      "description": "Algebra I quadratics, rhetoric & speeches, ecology & biomes, and world history revolutions.",
+      "subjects": {
+        "math": { "title": "Math: Algebra I & Quadratics", "icon": "📐", "description": "Factoring polynomials and graphing parabolas.", "lessons": [] },
+        "ela": { "title": "ELA: Rhetoric & Classical Speeches", "icon": "🗣️", "description": "Ethos, pathos, and logos in famous literature.", "lessons": [] },
+        "science": { "title": "Science: Environmental Ecology", "icon": "🌲", "description": "Carbon cycles, biodiversity, and climate science.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: The Industrial Revolution", "icon": "🏭", "description": "Technological leaps, urbanization, and labor movements.", "lessons": [] }
+      }
+    },
+    "10th": {
+      "id": "10th",
+      "title": "10th Grade",
+      "fullName": "10th Grade / Sophomore (High School)",
+      "tier": "high",
+      "icon": "📐",
+      "color": "from-teal-600 to-cyan-800",
+      "description": "Geometry proofs & trigonometry, world literature, chemical stoichiometry, and global conflicts.",
+      "subjects": {
+        "math": { "title": "Math: Geometry & Trigonometry", "icon": "📐", "description": "Triangles, sine/cosine/tangent, and spatial theorems.", "lessons": [] },
+        "ela": { "title": "ELA: World Literature & Archetypes", "icon": "🌍", "description": "Comparative global myths and modern novels.", "lessons": [] },
+        "science": { "title": "Science: Chemical Reactions & Moles", "icon": "🧪", "description": "Balancing equations and conservation of mass.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: 20th Century World History", "icon": "🌐", "description": "World Wars, the Cold War, and decolonization.", "lessons": [] }
+      }
+    },
+    "11th": {
+      "id": "11th",
+      "title": "11th Grade",
+      "fullName": "11th Grade / Junior (High School)",
+      "tier": "high",
+      "icon": "⚡",
+      "color": "from-blue-600 to-indigo-800",
+      "description": "Algebra II logarithms, American literature, Newtonian physics, and economic systems.",
+      "subjects": {
+        "math": { "title": "Math: Algebra II & Statistics", "icon": "📊", "description": "Exponential growth, logarithms, and normal distribution.", "lessons": [] },
+        "ela": { "title": "ELA: American Literature & Voices", "icon": "📜", "description": "The Harlem Renaissance, Transcendentalism, and modern essays.", "lessons": [] },
+        "science": { "title": "Science: Physics & Mechanics", "icon": "⚙️", "description": "Newton's laws of motion, momentum, and electricity.", "lessons": [] },
+        "social-studies": { "title": "Social Studies: Macro & Micro Economics", "icon": "💹", "description": "Supply and demand, inflation, and global trade markets.", "lessons": [] }
+      }
+    },
+    "12th": {
+      "id": "12th",
+      "title": "12th Grade",
+      "fullName": "12th Grade / Senior (High School)",
+      "tier": "high",
+      "icon": "🎓",
+      "color": "from-purple-600 to-pink-800",
+      "description": "Pre-Calculus & Practical Financial Math, analytical research, astrophysics, and modern government policy.",
+      "subjects": {
+        "math": {
+          "title": "Math: Practical Financial & Calculus",
+          "icon": "💡",
+          "description": "Budgeting, compound interest, loans, and introductory derivatives.",
+          "lessons": [
+            {
+              "id": "12th-math-1",
+              "title": "1. The 50/30/20 Visual Budgeting Method",
+              "badge": "Financial Literacy",
+              "time": "12 min",
+              "audioScript": "Budgeting doesn't have to be overwhelming numbers. Think of your income as three distinct buckets: Needs, Wants, and Future Savings.",
+              "summary": "50% Needs, 30% Wants, and 20% Savings create a balanced life budget without arithmetic stress.",
+              "contentHtml": "<p>Adult finances are much easier when managed with visual systems. The 50/30/20 framework divides take-home pay into 3 clear priorities:</p><p>• <strong>50% Needs:</strong> Rent, groceries, medication, utilities, and transport.<br>• <strong>30% Wants:</strong> Hobbies, eating out, games, subscriptions.<br>• <strong>20% Savings:</strong> Emergency fund and long-term security.</p>",
+              "widgetType": "math-blocks-budget",
+              "flashcards": [
+                { "front": "What percentage is reserved for Needs?", "back": "50% of your take-home pay." },
+                { "front": "Why is the 20% savings bucket critical?", "back": "To build an emergency fund that protects you from sudden expenses." }
+              ],
+              "quiz": {
+                "question": "Which expense belongs in the 50% Needs bucket?",
+                "options": [
+                  { "text": "Monthly Rent & Groceries", "correct": true, "feedback": "Correct! Shelter and food are essential needs." },
+                  { "text": "Video Game Subscriptions", "correct": false, "feedback": "Gaming subscriptions belong in the 30% Wants bucket." }
+                ]
+              }
+            }
+          ]
+        },
+        "ela": {
+          "title": "ELA: Capstone Research & Synthesis",
+          "icon": "🎓",
+          "description": "Independent thesis writing, presentation skills, and media literacy.",
+          "lessons": []
+        },
+        "science": {
+          "title": "Science: Astrophysics & Cosmology",
+          "icon": "🌌",
+          "description": "Black holes, relativity, the expanding universe, and quantum concepts.",
+          "lessons": [
+            {
+              "id": "12th-sci-1",
+              "title": "1. Orbital Mechanics & Gravity",
+              "badge": "Astrophysics",
+              "time": "15 min",
+              "audioScript": "Planets in orbit are essentially in constant free-fall around their star, where their forward momentum perfectly matches the downward pull of gravity.",
+              "summary": "Orbits are the delicate balance between forward velocity and gravitational pull.",
+              "contentHtml": "<p>Gravity acts as the cosmic tether holding celestial bodies in place. The Sun holds 99.8% of the Solar System's mass, curving spacetime around it.</p>",
+              "widgetType": "gravity-orbit",
+              "flashcards": [
+                { "front": "What creates an orbit?", "back": "The balance between forward speed and gravitational pull." },
+                { "front": "How much mass does the Sun hold?", "back": "Over 99.8% of the entire solar system's mass!" }
+              ],
+              "quiz": {
+                "question": "What keeps Earth from escaping into deep space?",
+                "options": [
+                  { "text": "The Sun's gravitational anchor", "correct": true, "feedback": "Spot on! The Sun's intense gravity keeps Earth in orbit." },
+                  { "text": "A magnetic shield", "correct": false, "feedback": "Gravity is the fundamental force responsible for planetary orbits." }
+                ]
+              }
+            }
+          ]
+        },
+        "social-studies": {
+          "title": "Social Studies: Modern Public Policy & Law",
+          "icon": "🏛️",
+          "description": "Constitutional law, global human rights, and community advocacy.",
+          "lessons": []
+        }
+      }
+    }
+  }
+}

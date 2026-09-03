@@ -1,0 +1,140 @@
+{
+  "gradeTiers": [
+    {
+      "id": "early",
+      "title": "Early Learning & Kindergarten (Pre-K to K)",
+      "grades": ["pre-k", "kindergarten"],
+      "icon": "🌱",
+      "description": "Sensory readiness, counting 1-20, phonemic sounds, and basic shapes."
+    },
+    {
+      "id": "elementary",
+      "title": "Elementary School (1st - 5th Grade)",
+      "grades": ["1st", "2nd", "3rd", "4th", "5th"],
+      "icon": "🚀",
+      "description": "Place values, arithmetic, reading comprehension, silent E, and ecosystem science."
+    },
+    {
+      "id": "middle",
+      "title": "Middle School (6th - 8th Grade)",
+      "grades": ["6th", "7th", "8th"],
+      "icon": "🧬",
+      "description": "Ratios, pre-algebra, argumentative writing, cells, and civics."
+    },
+    {
+      "id": "high",
+      "title": "High School (9th - 12th Grade)",
+      "grades": ["9th", "10th", "11th", "12th"],
+      "icon": "🎓",
+      "description": "Algebra, financial math, astrophysics, rhetoric, and economics."
+    }
+  ],
+  "subjects": [
+    { "id": "all", "title": "Comprehensive (All Subjects)", "icon": "🌟" },
+    { "id": "math", "title": "Mathematics", "icon": "🔢" },
+    { "id": "ela", "title": "English Language Arts", "icon": "📖" },
+    { "id": "science", "title": "Science & Nature", "icon": "🔬" },
+    { "id": "social-studies", "title": "Social Studies & Civics", "icon": "🏛️" }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "tier": "early",
+      "subject": "math",
+      "audioPrompt": "How many red apples are in the basket? One, two, three, four.",
+      "question": "How many apples do you see: 🍎 🍎 🍎 🍎 ?",
+      "visual": "🍎 🍎 🍎 🍎",
+      "options": [
+        { "text": "4 Apples", "correct": true, "points": 10, "skill": "Early Counting & Quantity" },
+        { "text": "2 Apples", "correct": false, "points": 0, "skill": "Early Counting & Quantity" },
+        { "text": "5 Apples", "correct": false, "points": 0, "skill": "Early Counting & Quantity" }
+      ]
+    },
+    {
+      "id": "q2",
+      "tier": "early",
+      "subject": "ela",
+      "audioPrompt": "Which letter sound does Apple start with?",
+      "question": "Which letter makes the 'Ah' sound like 🍎 Apple?",
+      "options": [
+        { "text": "Letter A", "correct": true, "points": 10, "skill": "Phonemic Recognition" },
+        { "text": "Letter B", "correct": false, "points": 0, "skill": "Phonemic Recognition" },
+        { "text": "Letter M", "correct": false, "points": 0, "skill": "Phonemic Recognition" }
+      ]
+    },
+    {
+      "id": "q3",
+      "tier": "elementary",
+      "subject": "math",
+      "audioPrompt": "What is the total value of 3 bundles of ten and 4 ones?",
+      "question": "What number is represented by 3 Tens and 4 Ones?",
+      "visual": "📦 📦 📦 + ▫️ ▫️ ▫️ ▫️",
+      "options": [
+        { "text": "34", "correct": true, "points": 10, "skill": "Place Value & Tens" },
+        { "text": "43", "correct": false, "points": 0, "skill": "Place Value & Tens" },
+        { "text": "7", "correct": false, "points": 0, "skill": "Place Value & Tens" }
+      ]
+    },
+    {
+      "id": "q4",
+      "tier": "elementary",
+      "subject": "ela",
+      "audioPrompt": "What happens when you add a silent E to the end of the word KIT?",
+      "question": "Add silent E to 'KIT'. What word does it become?",
+      "options": [
+        { "text": "KITE (Long I sound)", "correct": true, "points": 10, "skill": "Silent E Phonics" },
+        { "text": "KITT", "correct": false, "points": 0, "skill": "Silent E Phonics" },
+        { "text": "KOTE", "correct": false, "points": 0, "skill": "Silent E Phonics" }
+      ]
+    },
+    {
+      "id": "q5",
+      "tier": "elementary",
+      "subject": "science",
+      "audioPrompt": "Which celestial body holds most of the mass in our solar system?",
+      "question": "What holds over 99.8% of all the mass in our Solar System?",
+      "visual": "☀️",
+      "options": [
+        { "text": "The Sun", "correct": true, "points": 10, "skill": "Solar System Science" },
+        { "text": "Earth", "correct": false, "points": 0, "skill": "Solar System Science" },
+        { "text": "Jupiter", "correct": false, "points": 0, "skill": "Solar System Science" }
+      ]
+    },
+    {
+      "id": "q6",
+      "tier": "middle",
+      "subject": "math",
+      "audioPrompt": "Solve the algebraic equation: 2x plus 4 equals 14. What is x?",
+      "question": "If 2x + 4 = 14, what is the value of x?",
+      "options": [
+        { "text": "x = 5", "correct": true, "points": 10, "skill": "Linear Equations" },
+        { "text": "x = 10", "correct": false, "points": 0, "skill": "Linear Equations" },
+        { "text": "x = 7", "correct": false, "points": 0, "skill": "Linear Equations" }
+      ]
+    },
+    {
+      "id": "q7",
+      "tier": "high",
+      "subject": "math",
+      "audioPrompt": "In the 50/30/20 budgeting rule, what percentage goes to essential needs?",
+      "question": "Under the 50/30/20 budgeting rule, what percentage of income is allocated for essential Needs?",
+      "options": [
+        { "text": "50% (Rent, Groceries, Utilities)", "correct": true, "points": 10, "skill": "Practical Financial Math" },
+        { "text": "30%", "correct": false, "points": 0, "skill": "Practical Financial Math" },
+        { "text": "20%", "correct": false, "points": 0, "skill": "Practical Financial Math" }
+      ]
+    },
+    {
+      "id": "q8",
+      "tier": "high",
+      "subject": "science",
+      "audioPrompt": "What force prevents planetary bodies from flying straight off into deep space?",
+      "question": "What fundamental force curves the trajectory of planets into stable orbits?",
+      "options": [
+        { "text": "Gravitational Attraction", "correct": true, "points": 10, "skill": "Astrophysics & Mechanics" },
+        { "text": "Electromagnetic Shielding", "correct": false, "points": 0, "skill": "Astrophysics & Mechanics" },
+        { "text": "Atmospheric Friction", "correct": false, "points": 0, "skill": "Astrophysics & Mechanics" }
+      ]
+    }
+  ]
+}

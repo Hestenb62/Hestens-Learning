@@ -1,64 +1,82 @@
 # Hestens Learning 🌟
-> **Accessible, Neurodiversity-Centered E-Learning Platform**
-> *Designed specifically for students with learning differences, dyslexia, ADHD, autism/sensory sensitivities, dyscalculia, and executive functioning differences.*
+> **Accessible, Neurodiversity-Centered E-Learning Platform (Pre-K to 12th Grade)**
+> *Modular PHP Architecture • Universal Design for Learning (UDL) • WCAG 2.2 AAA Compliant*
 
 ---
 
-## 🚀 Key Features & Accommodations
+## 🚀 Key Features & Architectural Capabilities
 
-### 🔤 Advanced Typography & Dyslexia Support
-- **OpenDyslexic Font**: Direct local integration of OpenDyslexic (Regular, Bold, Italic) with gravity-weighted letters to prevent letter flipping and confusion.
-- **Accessible Font Suite**: Switch seamlessly between **OpenDyslexic**, **Lexend**, **Atkinson Hyperlegible**, and **Inter Sans**.
-- **Granular Spacing Sliders**: Real-time adjustable font scale (80%–160%), line-height (1.3x–2.4x), and letter/word spacing.
-- **Bionic Reading Mode**: Algorithmically bolds the initial fixation points of words to guide eye tracking and reduce reading fatigue.
+### 1. ♿ Accessibility Floating Action Button (FAB)
+- All assistive accommodations are tucked into a sleek **FAB** at the bottom-right corner.
+- Instantly openable via <kbd>Alt</kbd> + <kbd>A</kbd> or clicking the button.
+- **Font Selection**: OpenDyslexic (Regular, Bold, Italic), Lexend, Atkinson Hyperlegible, and Inter Sans.
+- **Sensory & Visual Stress Tints**: Calm Dark, Crisp Light, Warm Sepia (Irlen Tint), Sage Green, Serene Blue, and High Contrast AAA.
+- **Assistive Tools**: Interactive Reading Ruler (<kbd>Alt</kbd>+<kbd>R</kbd>), Focus Mask Dimmer, Bionic Reading Mode, TTS Karaoke Audio (<kbd>Alt</kbd>+<kbd>S</kbd>), and Zen Distraction-Free Mode (<kbd>Alt</kbd>+<kbd>Z</kbd>).
 
-### 🎨 Sensory Profiles & Visual Stress (Meares-Irlen) Tints
-- **Calm Modern Dark**: Soothing slate palette reducing blue light glare.
-- **Crisp Light**: High-readability daylight theme.
-- **Warm Sepia / Golden Tint**: Calming amber background designed for visual stress and Meares-Irlen syndrome.
-- **Sage Green & Serene Blue**: Low-sensory modes tailored for sensory overload and autism spectrum comfort.
-- **High-Contrast Monochrome (WCAG AAA)**: Pure black and high-visibility yellow/cyan compliant with 7:1+ contrast ratios.
+### 2. 🏠 Hero Section & 14 Grade Cards (Pre-K through 12th)
+- **Hero Banner**: Neurodiversity-affirming overview with direct links to:
+  - **"Get Started"** ➔ Diagnostic Assessment (`assessment.php`).
+  - **"About Us"** ➔ Mission and pedagogy (`about.php`).
+- **14 Grade Cards**:
+  - Pre-K, Kindergarten, 1st, 2nd, 3rd, 4th, 5th, 6th, 7th, 8th, 9th, 10th, 11th, and 12th Grade.
+  - Interactive tier filter tabs (All, Early, Elementary, Middle, High School).
 
-### 👓 Focus & Assistive Reading Tools
-- **Interactive Reading Ruler (`Alt+R`)**: Tinted reading bar that tracks cursor/line position with adjustable height and border guide.
-- **Focus Mask Dimmer**: Subtly dims background content outside the active reading zone.
-- **Text-to-Speech Karaoke Narrator (`Alt+S`)**: High-quality Web Speech API narration with real-time word-by-word visual highlight and adjustable speed rates (0.75x–1.5x).
-- **Zen Distraction-Free Mode (`Alt+Z`)**: Clears headers, sidebars, and extra widgets to focus purely on the active lesson chunk.
+### 3. 📚 4-Subject Grade Curriculum (`grade.php`)
+- Each grade contains 4 core subject tabs:
+  - 🔢 **Mathematics**
+  - 📖 **ELA (English Language Arts & Phonics)**
+  - 🔬 **Science & Nature**
+  - 🏛️ **Social Studies & Civics**
+- Dynamically displays lesson directory with time estimates and mastery status.
 
-### 🧠 Neurodivergent Cognitive & Executive Functioning Support
-- **Bite-Sized Modular Lessons**: Short, chunked step-by-step micro-lessons with zero overwhelming walls of text.
-- **"Explain Simply (TL;DR)"**: Instant plain-language analogies and summaries for every concept.
-- **Tactile Multi-Sensory Widgets**: Hands-on interactive simulators (e.g. 50/30/20 visual budget blocks for dyscalculia, gravity orbits, planetary sorters, recipe algorithms).
-- **Active Recall Flashcards**: Low-stress flip cards with keyboard controls (`Space` / `Enter`).
-- **Low-Stress Knowledge Checks**: Encouraging, non-punitive quizzes with immediate supportive feedback and zero countdown timer pressure.
-- **Interactive Notes & Voice Dictation**: Speech-to-Text integration for speaking notes aloud, with automatic `localStorage` persistence.
-- **Gentle Pomodoro Focus Timer**: Customizable focus session with soothing audio cues and stretch break reminders.
+### 4. 🧩 Dynamic Reusable Single-File Lesson Viewer (`lesson.php`)
+- Content is loaded dynamically from `data/curriculum.json`—only one PHP file is maintained for all courses and lessons!
+- Multi-sensory features:
+  - Text-to-Speech audio reader with word-by-word visual highlight.
+  - "Explain Simply (TL;DR)" plain-language summary cards.
+  - Tactile embedded widgets (e.g. 50/30/20 budget builder, solar gravity orbit simulator, sorting sorters).
+  - Active recall flashcards (<kbd>Space</kbd> / <kbd>Enter</kbd> to flip).
+  - Low-stress, non-punitive knowledge checks.
+
+### 5. 🎯 Diagnostic Assessment & Downloadable Report (`assessment.php`)
+- Multi-sensory evaluation categorized by grade tiers and subjects.
+- Audio narration for every question with zero stressful countdowns.
+- Instant on-screen summary + **"Download Detailed Learning Plan & Report (.txt)"** button.
+
+### 6. 🔍 Global Search & Student Hub
+- **Working Global Search Bar** (`search.php`): Searches across all grades, subjects, lessons, and topics.
+- **Student Learning Binder** (`profile.php`): Track completed milestones, voice notes, and active accommodations checklist.
+- **Voice Dictation Notes**: Speech-to-Text for free-form thoughts with local browser persistence.
+- **Resource-Rich Footer**: Curated links to IDA, CHADD, Understood.org, Irlen Institute, and W3C WAI.
 
 ---
 
-## ⌨️ Accessibility Keyboard Shortcuts
+## ⌨️ Global Keyboard Shortcuts
 
 | Shortcut | Action |
 | :--- | :--- |
-| <kbd>Alt</kbd> + <kbd>A</kbd> | Open / Close Accessibility Accommodations Drawer |
+| <kbd>Alt</kbd> + <kbd>A</kbd> | Open / Close Accessibility Accommodations FAB Drawer |
 | <kbd>Alt</kbd> + <kbd>R</kbd> | Toggle Reading Line Ruler |
-| <kbd>Alt</kbd> + <kbd>S</kbd> | Start / Stop Text-to-Speech Audio Narration |
+| <kbd>Alt</kbd> + <kbd>S</kbd> | Start / Stop Text-to-Speech Karaoke Narration |
 | <kbd>Alt</kbd> + <kbd>Z</kbd> | Toggle Zen Distraction-Free Mode |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd> | Navigate interactive elements with visible focus rings |
-| <kbd>Space</kbd> / <kbd>Enter</kbd> | Flip flashcards / Activate buttons |
-| <kbd>?</kbd> | View keyboard shortcuts cheatsheet |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | High-visibility focus ring navigation |
+| <kbd>Space</kbd> / <kbd>Enter</kbd> | Flip active recall flashcards / Activate controls |
+| <kbd>?</kbd> | Open keyboard shortcuts modal |
 
 ---
 
 ## 🛠️ How to Run Locally
 
-You can open `index.html` directly in any modern web browser, or launch with a lightweight dev server:
+Start the PHP development server:
 
-```bash
-# Start local development server
-npm start
-# Opens at http://localhost:3000
+```powershell
+# Using XAMPP PHP:
+& "C:\xampp\php\php.exe" -S localhost:8000
+
+# Or if php is in your PATH:
+php -S localhost:8000
 ```
+Then visit **`http://localhost:8000`** in your browser.
 
 ---
 

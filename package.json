@@ -1,11 +1,11 @@
 {
   "name": "hestens-learning",
   "version": "1.0.0",
-  "description": "E-learning designed by and for students with learning disabilities and neurodivergent minds.",
+  "description": "Accessible, Neurodiversity-Centered E-Learning Platform (Pre-K to 12th Grade) built with PHP.",
   "type": "module",
   "scripts": {
-    "start": "npx -y serve . -l 3000",
-    "dev": "npx -y serve . -l 3000"
+    "start": "php -S localhost:8000",
+    "serve:xampp": "C:\\xampp\\php\\php.exe -S localhost:8000"
   },
   "keywords": [
     "accessibility",
@@ -14,7 +14,8 @@
     "opendyslexic",
     "adhd",
     "neurodiversity",
-    "elearning"
+    "elearning",
+    "php"
   ],
   "author": "Hestens Learning",
   "license": "Apache-2.0"
