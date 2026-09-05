@@ -22,9 +22,32 @@ function get_all_grades() {
     return $curriculum['grades'] ?? [];
 }
 
+function normalize_grade_id($gradeId) {
+    if (!$gradeId) return null;
+    $g = strtolower(trim((string)$gradeId));
+    $map = [
+        'pre-k' => 'pre-k', 'prek' => 'pre-k', 'pk' => 'pre-k', '0' => 'pre-k', 'early' => 'pre-k',
+        'k' => 'kindergarten', 'kinder' => 'kindergarten', 'kindergarten' => 'kindergarten',
+        '1' => '1st', '1st' => '1st', 'first' => '1st', 'grade-1' => '1st', 'grade1' => '1st',
+        '2' => '2nd', '2nd' => '2nd', 'second' => '2nd', 'grade-2' => '2nd', 'grade2' => '2nd',
+        '3' => '3rd', '3rd' => '3rd', 'third' => '3rd', 'grade-3' => '3rd', 'grade3' => '3rd',
+        '4' => '4th', '4th' => '4th', 'fourth' => '4th', 'grade-4' => '4th', 'grade4' => '4th',
+        '5' => '5th', '5th' => '5th', 'fifth' => '5th', 'grade-5' => '5th', 'grade5' => '5th',
+        '6' => '6th', '6th' => '6th', 'sixth' => '6th', 'grade-6' => '6th', 'grade6' => '6th',
+        '7' => '7th', '7th' => '7th', 'seventh' => '7th', 'grade-7' => '7th', 'grade7' => '7th',
+        '8' => '8th', '8th' => '8th', 'eighth' => '8th', 'grade-8' => '8th', 'grade8' => '8th',
+        '9' => '9th', '9th' => '9th', 'ninth' => '9th', 'freshman' => '9th', 'grade-9' => '9th', 'grade9' => '9th',
+        '10' => '10th', '10th' => '10th', 'tenth' => '10th', 'sophomore' => '10th', 'grade-10' => '10th', 'grade10' => '10th',
+        '11' => '11th', '11th' => '11th', 'eleventh' => '11th', 'junior' => '11th', 'grade-11' => '11th', 'grade11' => '11th',
+        '12' => '12th', '12th' => '12th', 'twelfth' => '12th', 'senior' => '12th', 'grade-12' => '12th', 'grade12' => '12th',
+    ];
+    return $map[$g] ?? $g;
+}
+
 function get_grade($gradeId) {
+    $normalizedId = normalize_grade_id($gradeId);
     $grades = get_all_grades();
-    return $grades[$gradeId] ?? null;
+    return $grades[$normalizedId] ?? $grades[$gradeId] ?? null;
 }
 
 function get_lesson($gradeId, $subjectId, $lessonId) {

@@ -3,6 +3,7 @@
 /**
  * Hestens Learning - Home Page (index.php)
  */
+
 require_once __DIR__ . '/includes/helpers.php';
 
 $pageTitle = 'Hestens Learning | Pre-K through 12th Grade Accessible E-Learning';
@@ -80,9 +81,9 @@ include __DIR__ . '/includes/header.php';
   <div class="grade-cards-grid">
     <?php foreach ($allGrades as $gradeId => $grade): ?>
       <?php
-        $cardTier = ($grade['tier'] === 'early' || $grade['tier'] === 'elementary') ? 'elementary' : $grade['tier'];
+      $cardTier = ($grade['tier'] === 'early' || $grade['tier'] === 'elementary') ? 'elementary' : $grade['tier'];
       ?>
-      <article class="grade-card tier-<?= htmlspecialchars($cardTier) ?>" data-tier="<?= htmlspecialchars($cardTier) ?>" aria-labelledby="card-title-<?= $gradeId ?>">
+      <article class="grade-card tier-<?= htmlspecialchars($cardTier) ?>" data-tier="<?= htmlspecialchars($cardTier) ?>" data-href="grade.php?level=<?= urlencode($gradeId) ?>" aria-labelledby="card-title-<?= $gradeId ?>" style="cursor: pointer;" onclick="if(!event.target.closest('a')){ document.cookie='hestens_selected_grade=<?= urlencode($gradeId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gradeId) ?>'); window.location.href='grade.php?level=<?= urlencode($gradeId) ?>'; }">
         <div class="grade-card-header aurora-card-<?= htmlspecialchars($cardTier) ?>">
           <div class="grade-badge-row">
             <span class="grade-pill"><?= htmlspecialchars($grade['title']) ?></span>
@@ -105,7 +106,7 @@ include __DIR__ . '/includes/header.php';
           </div>
 
           <div class="grade-card-footer">
-            <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary grade-launch-btn" aria-label="Open <?= htmlspecialchars($grade['title']) ?> Curriculum">
+            <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary grade-launch-btn" aria-label="Open <?= htmlspecialchars($grade['title']) ?> Curriculum" onclick="document.cookie='hestens_selected_grade=<?= urlencode($gradeId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gradeId) ?>');">
               Explore <?= htmlspecialchars($grade['title']) ?> ➔
             </a>
           </div>

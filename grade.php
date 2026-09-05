@@ -4,13 +4,36 @@
  */
 require_once __DIR__ . '/includes/helpers.php';
 
-$gradeId = $_GET['level'] ?? '1st';
-$grade = get_grade($gradeId);
+// 1. Extract requested grade from $_GET, $_REQUEST, REQUEST_URI, QUERY_STRING, or Cookie
+$requestedGrade = $_GET['level'] ?? $_GET['grade'] ?? $_GET['id'] ?? $_GET['g'] ?? $_REQUEST['level'] ?? $_REQUEST['grade'] ?? null;
 
-if (!$grade) {
-    header("Location: index.php");
-    exit;
+if (!$requestedGrade && !empty($_SERVER['REQUEST_URI'])) {
+    $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
+    if (!empty($parsedUrl['query'])) {
+        parse_str($parsedUrl['query'], $qVars);
+        $requestedGrade = $qVars['level'] ?? $qVars['grade'] ?? $qVars['id'] ?? $qVars['g'] ?? null;
+    }
 }
+
+if (!$requestedGrade && !empty($_SERVER['QUERY_STRING'])) {
+    parse_str($_SERVER['QUERY_STRING'], $qVars);
+    $requestedGrade = $qVars['level'] ?? $qVars['grade'] ?? $qVars['id'] ?? $qVars['g'] ?? null;
+}
+
+if (!$requestedGrade && !empty($_COOKIE['hestens_selected_grade'])) {
+    $requestedGrade = $_COOKIE['hestens_selected_grade'];
+}
+
+$normalizedGrade = normalize_grade_id($requestedGrade);
+$grade = $normalizedGrade ? get_grade($normalizedGrade) : null;
+
+// Fallback to 1st grade only if nothing matched
+if (!$grade) {
+    $grade = get_grade('1st');
+}
+
+$gradeId = $grade['id'];
+$allGrades = get_all_grades();
 
 $activeTab = $_GET['tab'] ?? 'math';
 if (!isset($grade['subjects'][$activeTab])) {
@@ -24,12 +47,48 @@ $activePage = 'grades';
 include __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Breadcrumbs -->
-<nav class="breadcrumb-nav" aria-label="Breadcrumb">
-  <a href="index.php">Home</a>
-  <span aria-hidden="true">›</span>
-  <span aria-current="page"><?= htmlspecialchars($grade['title']) ?></span>
-</nav>
+<!-- Client-side query sync safeguard (for local dev servers like FiveServer/LiveServer that strip query strings from PHP) -->
+<script>
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const clientGrade = params.get('level') || params.get('grade') || params.get('id');
+    const currentGrade = <?= json_encode($gradeId) ?>;
+    
+    if (clientGrade && clientGrade.toLowerCase() !== currentGrade.toLowerCase()) {
+      const cookieKey = 'hestens_selected_grade=' + encodeURIComponent(clientGrade);
+      if (!document.cookie.includes(cookieKey)) {
+        document.cookie = cookieKey + '; path=/; max-age=86400';
+        sessionStorage.setItem('hestens_selected_grade', clientGrade);
+        window.location.reload();
+      }
+    }
+  })();
+</script>
+
+<!-- Breadcrumbs & Quick Grade Switcher Navigation -->
+<div class="grade-top-nav-bar">
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <a href="index.php">Home</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page"><?= htmlspecialchars($grade['title']) ?></span>
+  </nav>
+
+  <!-- Quick Grade Switcher -->
+  <div class="grade-quick-switcher" role="navigation" aria-label="Quick jump to another grade level">
+    <span class="switcher-title">Jump to Grade:</span>
+    <div class="switcher-pills-row">
+      <?php foreach ($allGrades as $gId => $g): ?>
+        <a href="grade.php?level=<?= urlencode($gId) ?>" 
+           class="grade-switcher-pill <?= ($gId === $gradeId) ? 'active' : '' ?>"
+           onclick="document.cookie='hestens_selected_grade=<?= urlencode($gId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gId) ?>');"
+           title="<?= htmlspecialchars($g['fullName']) ?>"
+           aria-label="<?= htmlspecialchars($g['title']) ?>">
+          <?= htmlspecialchars($g['title']) ?>
+        </a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</div>
 
 <!-- Grade Header Hero with Aurora Mesh -->
 <?php 
