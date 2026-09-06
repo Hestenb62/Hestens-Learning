@@ -35,7 +35,7 @@ include __DIR__ . '/includes/header.php';
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none">Home</a></li>
       <li class="breadcrumb-item"><a href="grade.php?level=<?= urlencode($gradeId) ?>" class="text-decoration-none"><?= htmlspecialchars($grade['title']) ?></a></li>
-      <li class="breadcrumb-item"><a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="text-decoration-none"><?= htmlspecialchars($subject['title']) ?></a></li>
+      <li class="breadcrumb-item"><a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="text-decoration-none"><?= htmlspecialchars(get_subject_display_name($subjectId, $subject['title'])) ?></a></li>
       <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($lesson['title']) ?></li>
     </ol>
   </nav>
@@ -44,11 +44,11 @@ include __DIR__ . '/includes/header.php';
     <!-- Lesson Header & Audio Narrator Bar -->
     <div class="card bg-body-tertiary border p-3 mb-4 rounded-3 shadow-sm">
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 pb-3 border-bottom mb-3">
-        <a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="btn btn-sm btn-secondary d-inline-flex align-items-center gap-2" aria-label="Return to <?= htmlspecialchars($subject['title']) ?> curriculum">
-          <span>◀</span> <span>Back to <?= htmlspecialchars($subject['title']) ?></span>
+        <a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="btn btn-sm btn-secondary d-inline-flex align-items-center gap-2" aria-label="Return to <?= htmlspecialchars(get_subject_display_name($subjectId, $subject['title'])) ?> curriculum">
+          <span>◀</span> <span>Back to <?= htmlspecialchars(get_subject_display_name($subjectId, $subject['title'])) ?></span>
         </a>
         <div class="text-md-end">
-          <h2 class="h5 fw-bold text-body mb-0"><?= htmlspecialchars($grade['title']) ?> • <?= htmlspecialchars($subject['title']) ?></h2>
+          <h2 class="h5 fw-bold text-body mb-0"><?= htmlspecialchars($grade['title']) ?> • <?= htmlspecialchars(get_subject_display_name($subjectId, $subject['title'])) ?></h2>
           <span class="small text-body-secondary">Interactive Step-by-Step Lesson</span>
         </div>
       </div>
@@ -131,7 +131,7 @@ include __DIR__ . '/includes/header.php';
           </a>
         <?php else: ?>
           <a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="btn btn-secondary">
-            ◀ Back to <?= htmlspecialchars($subject['title']) ?>
+            ◀ Back to <?= htmlspecialchars(get_subject_display_name($subjectId, $subject['title'])) ?>
           </a>
         <?php endif; ?>
 

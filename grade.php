@@ -66,31 +66,13 @@ include __DIR__ . '/includes/header.php';
 </script>
 
 <div class="container py-4">
-  <!-- Breadcrumbs & Quick Grade Switcher Navigation -->
-  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($grade['title']) ?></li>
-      </ol>
-    </nav>
-
-    <!-- Quick Grade Switcher -->
-    <div class="d-flex align-items-center gap-2 flex-wrap" role="navigation" aria-label="Quick jump to another grade level">
-      <span class="small fw-bold text-body-secondary">Grade:</span>
-      <div class="d-flex flex-wrap gap-1">
-        <?php foreach ($allGrades as $gId => $g): ?>
-          <a href="grade.php?level=<?= urlencode($gId) ?>" 
-             class="btn btn-sm <?= ($gId === $gradeId) ? 'btn-primary' : 'btn-outline-secondary' ?> rounded-pill px-2 py-0"
-             onclick="document.cookie='hestens_selected_grade=<?= urlencode($gId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gId) ?>');"
-             title="<?= htmlspecialchars($g['fullName']) ?>"
-             aria-label="<?= htmlspecialchars($g['title']) ?>">
-            <?= htmlspecialchars($g['title']) ?>
-          </a>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </div>
+  <!-- Breadcrumbs Navigation -->
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($grade['title']) ?></li>
+    </ol>
+  </nav>
 
   <!-- Grade Header Hero with Aurora Mesh -->
   <?php 
@@ -125,7 +107,7 @@ include __DIR__ . '/includes/header.php';
             id="tab-<?= $subKey ?>"
           >
             <span aria-hidden="true"><?= $subject['icon'] ?></span>
-            <span class="fw-bold"><?= htmlspecialchars($subject['title']) ?></span>
+            <span class="fw-bold"><?= htmlspecialchars(get_subject_display_name($subKey, $subject['title'])) ?></span>
             <?php if (!empty($subject['lessons'])): ?>
               <span class="badge rounded-pill bg-body-secondary text-body-secondary ms-1"><?= count($subject['lessons']) ?></span>
             <?php endif; ?>

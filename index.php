@@ -14,7 +14,7 @@ $allGrades = get_all_grades();
 include __DIR__ . '/includes/header.php';
 ?>
 
-<div class="container py-4">
+<div class="container-xxl py-4">
   <!-- ================= HERO SECTION ================= -->
   <section class="hero-banner p-4 p-md-5 mb-5 rounded-4 shadow-sm border position-relative overflow-hidden" aria-labelledby="hero-title-text">
     <div class="hero-text position-relative" style="z-index: 1;">
@@ -79,42 +79,76 @@ include __DIR__ . '/includes/header.php';
       </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 grade-cards-grid">
+    <!-- Doubled full-width grade cards grid with unified Aurora Mesh Background -->
+    <div class="row row-cols-1 g-4 grade-cards-grid">
       <?php foreach ($allGrades as $gradeId => $grade): ?>
         <?php
         $cardTier = ($grade['tier'] === 'early' || $grade['tier'] === 'elementary') ? 'elementary' : $grade['tier'];
         ?>
-        <div class="col grade-card tier-<?= htmlspecialchars($cardTier) ?>" data-tier="<?= htmlspecialchars($cardTier) ?>">
-          <article class="card h-100 shadow-sm border-0 overflow-hidden" data-href="grade.php?level=<?= urlencode($gradeId) ?>" aria-labelledby="card-title-<?= $gradeId ?>" style="cursor: pointer;" onclick="if(!event.target.closest('a')){ document.cookie='hestens_selected_grade=<?= urlencode($gradeId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gradeId) ?>'); window.location.href='grade.php?level=<?= urlencode($gradeId) ?>'; }">
-            <div class="card-header border-0 aurora-card-<?= htmlspecialchars($cardTier) ?> p-4 position-relative">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="badge rounded-pill bg-light text-dark fw-bold px-3 py-1"><?= htmlspecialchars($grade['title']) ?></span>
-                <span class="badge rounded-pill bg-dark-subtle text-light px-2 py-1 small">4 Core Subjects</span>
+        <article 
+          class="col-12 grade-card aurora-card-full tier-<?= htmlspecialchars($cardTier) ?> aurora-mesh-<?= htmlspecialchars($cardTier) ?> p-4 p-md-5" 
+          data-tier="<?= htmlspecialchars($cardTier) ?>"
+          data-href="grade.php?level=<?= urlencode($gradeId) ?>" 
+          aria-labelledby="card-title-<?= $gradeId ?>" 
+          tabindex="0" 
+          role="region"
+          style="cursor: pointer;" 
+          onclick="if(!event.target.closest('a')){ document.cookie='hestens_selected_grade=<?= urlencode($gradeId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gradeId) ?>'); window.location.href='grade.php?level=<?= urlencode($gradeId) ?>'; }"
+        >
+          <div class="row g-4 align-items-center">
+            <!-- Left Column: Pill Badges, Large Icon & Title -->
+            <div class="col-12 col-lg-4 d-flex flex-column justify-content-between">
+              <div>
+                <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                  <span class="glass-pill"><?= htmlspecialchars($grade['title']) ?></span>
+                  <span class="glass-pill" style="opacity: 0.85; font-size: 0.75rem;">4 Core Subjects</span>
+                </div>
+                <div class="d-flex align-items-center gap-3 my-2">
+                  <div class="grade-icon-large display-3 text-white" aria-hidden="true"><?= $grade['icon'] ?></div>
+                  <div>
+                    <h3 id="card-title-<?= $gradeId ?>" class="h2 fw-bold text-white mb-1"><?= htmlspecialchars($grade['title']) ?></h3>
+                    <p class="text-white-50 fs-6 mb-0"><?= htmlspecialchars($grade['fullName']) ?></p>
+                  </div>
+                </div>
               </div>
-              <div class="grade-icon-large display-4 mb-2" aria-hidden="true"><?= $grade['icon'] ?></div>
-              <h3 id="card-title-<?= $gradeId ?>" class="h4 fw-bold text-white mb-1"><?= htmlspecialchars($grade['title']) ?></h3>
-              <p class="text-white-50 small mb-0"><?= htmlspecialchars($grade['fullName']) ?></p>
+              <div class="mt-3">
+                <span class="badge rounded-pill bg-black bg-opacity-30 text-white border border-white border-opacity-25 px-3 py-1">
+                  <?= ucfirst($grade['tier']) ?> School Curriculum
+                </span>
+              </div>
             </div>
 
-            <div class="card-body d-flex flex-column p-4">
-              <p class="text-body-secondary small mb-3 flex-grow-1"><?= htmlspecialchars($grade['description']) ?></p>
+            <!-- Right Column: Description, Subject Chips & Action CTA Button -->
+            <div class="col-12 col-lg-8 d-flex flex-column justify-content-between">
+              <div class="mb-4">
+                <p class="text-white fs-5 mb-4 lh-base" style="opacity: 0.95; text-shadow: 0 1px 2px rgba(0,0,0,0.25);">
+                  <?= htmlspecialchars($grade['description']) ?>
+                </p>
 
-              <div class="d-flex flex-wrap gap-1 mb-4">
-                <?php foreach ($grade['subjects'] as $subKey => $sub): ?>
-                  <span class="badge rounded-pill bg-body-secondary text-body-secondary border px-2 py-1 small" title="<?= htmlspecialchars($sub['title']) ?>">
-                    <?= $sub['icon'] ?> <?= htmlspecialchars($sub['title']) ?>
-                  </span>
-                <?php endforeach; ?>
+                <div class="d-flex flex-wrap gap-2">
+                  <?php foreach ($grade['subjects'] as $subKey => $sub): ?>
+                    <span class="glass-chip" title="<?= htmlspecialchars($sub['title']) ?>">
+                      <span aria-hidden="true"><?= $sub['icon'] ?></span>
+                      <span><?= htmlspecialchars(get_subject_display_name($subKey, $sub['title'])) ?></span>
+                    </span>
+                  <?php endforeach; ?>
+                </div>
               </div>
 
-              <div class="mt-auto pt-2">
-                <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2" aria-label="Open <?= htmlspecialchars($grade['title']) ?> Curriculum" onclick="document.cookie='hestens_selected_grade=<?= urlencode($gradeId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gradeId) ?>');">
-                  <span>Explore <?= htmlspecialchars($grade['title']) ?></span> <span>➔</span>
+              <div class="d-flex justify-content-end pt-3 border-top border-white border-opacity-25">
+                <a 
+                  href="grade.php?level=<?= urlencode($gradeId) ?>" 
+                  class="btn action-btn-explore btn-lg px-4 py-2 d-inline-flex align-items-center gap-2" 
+                  aria-label="Explore <?= htmlspecialchars($grade['title']) ?> Curriculum" 
+                  onclick="document.cookie='hestens_selected_grade=<?= urlencode($gradeId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gradeId) ?>');"
+                >
+                  <span>Explore <?= htmlspecialchars($grade['title']) ?> Curriculum</span>
+                  <span aria-hidden="true">➔</span>
                 </a>
               </div>
             </div>
-          </article>
-        </div>
+          </div>
+        </article>
       <?php endforeach; ?>
     </div>
   </section>
