@@ -183,8 +183,12 @@
           this.setZenMode(!this.prefs.zenMode);
         } else if (e.key === '?') {
           e.preventDefault();
-          const modal = document.getElementById('shortcuts-modal');
-          if (modal) modal.classList.toggle('open');
+          const modalEl = document.getElementById('shortcuts-modal');
+          if (window.bootstrap && modalEl) {
+            window.bootstrap.Modal.getOrCreateInstance(modalEl).toggle();
+          } else if (modalEl) {
+            modalEl.classList.toggle('open');
+          }
         }
       });
     }
@@ -194,8 +198,10 @@
       this.prefs.theme = themeName;
       if (themeName === 'dark') {
         document.documentElement.removeAttribute('data-theme');
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
       } else {
         document.documentElement.setAttribute('data-theme', themeName);
+        document.documentElement.setAttribute('data-bs-theme', (themeName === 'high-contrast') ? 'dark' : 'light');
       }
       this.savePreferences();
       this.announce(`Theme set to ${themeName}`);

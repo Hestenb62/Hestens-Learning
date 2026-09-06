@@ -93,6 +93,21 @@
 
   --transition-speed: 0.25s;
   --transition-fn: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Bootstrap 5 Variable Synchronization */
+  --bs-body-bg: var(--bg-primary);
+  --bs-body-color: var(--text-primary);
+  --bs-body-font-family: var(--font-family-base);
+  --bs-primary: var(--accent-primary);
+  --bs-primary-rgb: 56, 189, 248;
+  --bs-link-color: var(--accent-primary);
+  --bs-link-hover-color: var(--accent-hover);
+  --bs-card-bg: var(--bg-card);
+  --bs-card-color: var(--text-primary);
+  --bs-card-border-color: var(--border-subtle);
+  --bs-border-color: var(--border-subtle);
+  --bs-tertiary-bg: var(--bg-secondary);
+  --bs-secondary-bg: var(--bg-tertiary);
 }
 
 /* --- Theme: Crisp Light --- */

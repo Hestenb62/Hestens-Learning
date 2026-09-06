@@ -11,99 +11,103 @@ $activePage = 'profile';
 include __DIR__ . '/includes/header.php';
 ?>
 
-<div class="profile-container">
-  <div class="profile-header-banner">
-    <div class="profile-avatar">🎓</div>
-    <div class="profile-header-text">
-      <span class="hero-badge">Student Learning Binder</span>
-      <h1 class="profile-title">Personal Learning Hub & Accommodations</h1>
-      <p style="color:var(--text-secondary); margin-top:0.25rem;">
+<div class="container py-4">
+  <div class="card border rounded-4 shadow-sm p-4 p-md-5 mb-4 d-flex flex-column flex-md-row align-items-center gap-4">
+    <div class="display-3" aria-hidden="true">🎓</div>
+    <div class="text-center text-md-start">
+      <div class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-3 py-1 mb-2">
+        Student Learning Binder
+      </div>
+      <h1 class="display-6 fw-bold text-body mb-2">Personal Learning Hub & Accommodations</h1>
+      <p class="lead text-body-secondary mb-0">
         Your progress, saved voice thoughts, and assistive accessibility profile are safely stored in your browser.
       </p>
     </div>
   </div>
 
-  <div class="profile-grid">
+  <div class="row g-4">
     <!-- Left Column: Mastered Lessons & Notes -->
-    <div class="profile-col-main">
+    <div class="col-12 col-lg-8 d-flex flex-column gap-4">
       <!-- Mastered Lessons Section -->
-      <section class="binder-card" aria-labelledby="mastered-heading">
-        <div class="binder-card-header">
-          <h2 id="mastered-heading" class="binder-card-title">
+      <section class="card border rounded-4 p-4 shadow-sm" aria-labelledby="mastered-heading">
+        <div class="d-flex justify-content-between align-items-center pb-3 border-bottom mb-3">
+          <h2 id="mastered-heading" class="h4 fw-bold text-body mb-0">
             <span>🏆</span> Mastered Lessons
           </h2>
-          <span id="profile-completed-count" class="card-pill">0 Completed</span>
+          <span id="profile-completed-count" class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-2 fs-6">0 Completed</span>
         </div>
-        <div id="mastered-lessons-list" class="mastered-list">
+        <div id="mastered-lessons-list" class="mastered-list py-2">
           <!-- Populated dynamically via JS -->
-          <p class="text-muted" style="padding:1rem 0;">No completed lessons yet. Explore our grades and take your first bite-sized lesson!</p>
+          <p class="text-body-secondary mb-0">No completed lessons yet. Explore our grades and take your first bite-sized lesson!</p>
         </div>
-        <a href="index.php" class="btn btn-secondary" style="margin-top:1rem;">Explore Curriculum ➔</a>
+        <div class="pt-3 border-top mt-3">
+          <a href="index.php" class="btn btn-secondary">Explore Curriculum ➔</a>
+        </div>
       </section>
 
       <!-- Saved Notes & Audio Dictation Section -->
-      <section class="binder-card" aria-labelledby="notes-heading">
-        <div class="binder-card-header">
-          <h2 id="notes-heading" class="binder-card-title">
+      <section class="card border rounded-4 p-4 shadow-sm" aria-labelledby="notes-heading">
+        <div class="d-flex justify-content-between align-items-center pb-3 border-bottom mb-3">
+          <h2 id="notes-heading" class="h4 fw-bold text-body mb-0">
             <span>📝</span> My Saved Notes & Voice Thoughts
           </h2>
-          <button id="profile-clear-notes" class="btn btn-secondary" style="font-size:0.8rem; padding:0.3rem 0.7rem;">Clear Notes</button>
+          <button id="profile-clear-notes" class="btn btn-sm btn-outline-danger">Clear Notes</button>
         </div>
-        <textarea id="profile-notes-area" class="notes-textarea" style="min-height:180px;" placeholder="Your notes from lessons and voice dictation appear here..."></textarea>
-        <span style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem; display:block;">
+        <textarea id="profile-notes-area" class="form-control" style="min-height:180px;" placeholder="Your notes from lessons and voice dictation appear here..."></textarea>
+        <span class="small text-body-secondary mt-2 d-block">
           💡 You can also dictate notes anytime by clicking the 📝 icon in the top header.
         </span>
       </section>
     </div>
 
     <!-- Right Column: Accommodations Profile Checklist -->
-    <div class="profile-col-side">
-      <section class="binder-card" aria-labelledby="accommodations-heading">
-        <div class="binder-card-header">
-          <h2 id="accommodations-heading" class="binder-card-title">
+    <div class="col-12 col-lg-4">
+      <section class="card border rounded-4 p-4 shadow-sm" aria-labelledby="accommodations-heading">
+        <div class="pb-3 border-bottom mb-3">
+          <h2 id="accommodations-heading" class="h4 fw-bold text-body mb-0">
             <span>⚙️</span> Active Accommodations
           </h2>
         </div>
-        <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">
+        <p class="small text-body-secondary mb-3">
           Your current neurodiversity and sensory profile:
         </p>
 
-        <div class="accommodation-status-list">
-          <div class="acc-status-item">
-            <span class="acc-icon">🔤</span>
+        <ul class="list-group list-group-flush mb-4 rounded-3 border">
+          <li class="list-group-item d-flex align-items-center gap-3 py-3 bg-transparent">
+            <span class="fs-4">🔤</span>
             <div>
-              <strong>Font Choice:</strong>
-              <div id="acc-font-name" style="font-size:0.85rem; color:var(--accent-primary);">Lexend</div>
+              <strong class="small d-block text-body">Font Choice:</strong>
+              <span id="acc-font-name" class="fw-bold text-primary">Lexend</span>
             </div>
-          </div>
+          </li>
 
-          <div class="acc-status-item">
-            <span class="acc-icon">🎨</span>
+          <li class="list-group-item d-flex align-items-center gap-3 py-3 bg-transparent">
+            <span class="fs-4">🎨</span>
             <div>
-              <strong>Visual Theme:</strong>
-              <div id="acc-theme-name" style="font-size:0.85rem; color:var(--accent-primary);">Calm Dark</div>
+              <strong class="small d-block text-body">Visual Theme:</strong>
+              <span id="acc-theme-name" class="fw-bold text-primary">Calm Dark</span>
             </div>
-          </div>
+          </li>
 
-          <div class="acc-status-item">
-            <span class="acc-icon">📏</span>
+          <li class="list-group-item d-flex align-items-center gap-3 py-3 bg-transparent">
+            <span class="fs-4">📏</span>
             <div>
-              <strong>Reading Ruler:</strong>
-              <div id="acc-ruler-state" style="font-size:0.85rem; color:var(--text-muted);">Disabled (Press Alt+R)</div>
+              <strong class="small d-block text-body">Reading Ruler:</strong>
+              <span id="acc-ruler-state" class="small text-body-secondary">Disabled (Press Alt+R)</span>
             </div>
-          </div>
+          </li>
 
-          <div class="acc-status-item">
-            <span class="acc-icon">👁️</span>
+          <li class="list-group-item d-flex align-items-center gap-3 py-3 bg-transparent">
+            <span class="fs-4">👁️</span>
             <div>
-              <strong>Bionic Reading:</strong>
-              <div id="acc-bionic-state" style="font-size:0.85rem; color:var(--text-muted);">Disabled</div>
+              <strong class="small d-block text-body">Bionic Reading:</strong>
+              <span id="acc-bionic-state" class="small text-body-secondary">Disabled</span>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
 
-        <button onclick="document.getElementById('a11y-fab-trigger').click()" class="btn btn-primary" style="width:100%; margin-top:1.25rem;">
-          <span>⚙️</span> Adjust Accommodations (Alt+A)
+        <button onclick="document.getElementById('a11y-fab-trigger').click()" class="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2">
+          <span>⚙️</span> <span>Adjust Accommodations (Alt+A)</span>
         </button>
       </section>
     </div>

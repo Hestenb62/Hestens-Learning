@@ -11,55 +11,69 @@ $activePage = 'settings';
 include __DIR__ . '/includes/header.php';
 ?>
 
-<div class="settings-container">
-  <div class="section-header" style="margin-bottom: 2rem;">
-    <div>
-      <h1 class="section-title">⚙️ Site Settings & Data Storage</h1>
-      <p style="color:var(--text-secondary); margin-top:0.25rem;">
-        Customize how your preferences and lesson progress are stored.
-      </p>
-    </div>
+<div class="container py-4">
+  <div class="pb-3 border-bottom mb-4">
+    <h1 class="h2 fw-bold text-body mb-1">⚙️ Site Settings & Data Storage</h1>
+    <p class="text-body-secondary mb-0">
+      Customize how your preferences and lesson progress are stored.
+    </p>
   </div>
 
-  <div class="settings-grid">
+  <div class="row g-4">
     <!-- Storage & Privacy Card -->
-    <section class="binder-card">
-      <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">
-        🔒 Localhost & Cookie Storage
-      </h2>
-      <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:1rem;">
-        Hestens Learning stores your accessibility preferences (font choice, visual tints, line spacing) and completed lessons locally in your browser (Cookies & LocalStorage) for instant zero-latency loading.
-      </p>
+    <div class="col-12 col-md-6">
+      <section class="card border rounded-4 p-4 h-100 shadow-sm">
+        <h2 class="h4 fw-bold text-body mb-3">
+          🔒 Localhost & Cookie Storage
+        </h2>
+        <p class="text-body-secondary mb-4 lh-base">
+          Hestens Learning stores your accessibility preferences (font choice, visual tints, line spacing) and completed lessons locally in your browser (Cookies & LocalStorage) for instant zero-latency loading.
+        </p>
 
-      <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:1.5rem;">
-        <button id="clear-progress-btn" class="btn btn-secondary" style="color:var(--warning-color); border-color:var(--warning-color); justify-content:flex-start;">
-          <span>🗑️</span> <span>Reset Completed Lessons Progress</span>
-        </button>
-        <button id="clear-all-data-btn" class="btn btn-secondary" style="color:var(--warning-color); border-color:var(--warning-color); justify-content:flex-start;">
-          <span>⚠️</span> <span>Clear All Local Preferences & Stored Notes</span>
-        </button>
-      </div>
-    </section>
+        <div class="d-flex flex-column gap-2 mt-auto">
+          <button id="clear-progress-btn" class="btn btn-outline-warning text-start d-flex align-items-center gap-2">
+            <span>🗑️</span> <span>Reset Completed Lessons Progress</span>
+          </button>
+          <button id="clear-all-data-btn" class="btn btn-outline-danger text-start d-flex align-items-center gap-2">
+            <span>⚠️</span> <span>Clear All Local Preferences & Stored Notes</span>
+          </button>
+        </div>
+      </section>
+    </div>
 
     <!-- Quick Shortcuts Card -->
-    <section class="binder-card">
-      <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">
-        ⌨️ Accessibility Quick Shortcuts
-      </h2>
-      <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:1rem;">
-        Anticipate quick hotkeys to operate the learning platform seamlessly:
-      </p>
-      <ul style="list-style:none; display:flex; flex-direction:column; gap:0.6rem; font-weight:600;">
-        <li><kbd class="kbd-badge">Alt + A</kbd> : Open Accommodations Suite (FAB)</li>
-        <li><kbd class="kbd-badge">Alt + R</kbd> : Toggle Reading Line Ruler</li>
-        <li><kbd class="kbd-badge">Alt + S</kbd> : Toggle Text-to-Speech Audio</li>
-        <li><kbd class="kbd-badge">Alt + Z</kbd> : Toggle Zen Distraction-Free Mode</li>
-      </ul>
+    <div class="col-12 col-md-6">
+      <section class="card border rounded-4 p-4 h-100 shadow-sm d-flex flex-column">
+        <h2 class="h4 fw-bold text-body mb-3">
+          ⌨️ Accessibility Quick Shortcuts
+        </h2>
+        <p class="text-body-secondary mb-3">
+          Anticipate quick hotkeys to operate the learning platform seamlessly:
+        </p>
+        <ul class="list-group list-group-flush mb-4 rounded-3 border">
+          <li class="list-group-item d-flex justify-content-between align-items-center py-2 bg-transparent">
+            <span>Open Accommodations Suite (FAB)</span>
+            <kbd class="badge bg-body-secondary text-body-secondary border">Alt + A</kbd>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center py-2 bg-transparent">
+            <span>Toggle Reading Line Ruler</span>
+            <kbd class="badge bg-body-secondary text-body-secondary border">Alt + R</kbd>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center py-2 bg-transparent">
+            <span>Toggle Text-to-Speech Audio</span>
+            <kbd class="badge bg-body-secondary text-body-secondary border">Alt + S</kbd>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center py-2 bg-transparent">
+            <span>Toggle Zen Distraction-Free Mode</span>
+            <kbd class="badge bg-body-secondary text-body-secondary border">Alt + Z</kbd>
+          </li>
+        </ul>
 
-      <button onclick="document.getElementById('shortcuts-modal').classList.add('open')" class="btn btn-primary" style="margin-top:1.5rem; width:100%;">
-        View Full Keyboard Cheatsheet (?)
-      </button>
-    </section>
+        <button data-bs-toggle="modal" data-bs-target="#shortcuts-modal" class="btn btn-primary w-100 mt-auto py-2">
+          View Full Keyboard Cheatsheet (?)
+        </button>
+      </section>
+    </div>
   </div>
 </div>
 

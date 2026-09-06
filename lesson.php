@@ -29,119 +29,124 @@ $activePage = 'grades';
 include __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Breadcrumbs -->
-<nav class="breadcrumb-nav" aria-label="Breadcrumb">
-  <a href="index.php">Home</a>
-  <span aria-hidden="true">›</span>
-  <a href="grade.php?level=<?= urlencode($gradeId) ?>"><?= htmlspecialchars($grade['title']) ?></a>
-  <span aria-hidden="true">›</span>
-  <a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>"><?= htmlspecialchars($subject['title']) ?></a>
-  <span aria-hidden="true">›</span>
-  <span aria-current="page"><?= htmlspecialchars($lesson['title']) ?></span>
-</nav>
+<div class="container py-4">
+  <!-- Breadcrumbs -->
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none">Home</a></li>
+      <li class="breadcrumb-item"><a href="grade.php?level=<?= urlencode($gradeId) ?>" class="text-decoration-none"><?= htmlspecialchars($grade['title']) ?></a></li>
+      <li class="breadcrumb-item"><a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="text-decoration-none"><?= htmlspecialchars($subject['title']) ?></a></li>
+      <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($lesson['title']) ?></li>
+    </ol>
+  </nav>
 
-<div class="lesson-view-wrapper">
-  <!-- Lesson Header Bar -->
-  <div class="lesson-header-bar">
-    <div class="lesson-nav-info">
-      <a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="btn btn-secondary" aria-label="Return to <?= htmlspecialchars($subject['title']) ?> curriculum">
-        <span>◀</span> <span>Back to <?= htmlspecialchars($subject['title']) ?></span>
-      </a>
-      <div>
-        <h2 style="font-size: 1.15rem; font-weight: 800;"><?= htmlspecialchars($grade['title']) ?> • <?= htmlspecialchars($subject['title']) ?></h2>
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Interactive Step-by-Step Lesson</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Audio Narration Bar -->
-  <div class="audio-narrator-bar">
-    <div class="audio-controls">
-      <button class="btn btn-primary tts-toggle-btn" id="tts-lesson-btn" aria-label="Listen to this lesson read aloud (Alt+S)">
-        <span aria-hidden="true">🔊</span> <span>Listen (Aloud)</span>
-      </button>
-      <label for="tts-speed-select" style="font-size: 0.85rem; font-weight: 700;">Speed:</label>
-      <select id="tts-speed-select" class="audio-speed-select" aria-label="Adjust voice reading rate">
-        <option value="0.75">0.75x (Relaxed)</option>
-        <option value="1.0" selected>1.0x (Normal)</option>
-        <option value="1.25">1.25x (Brisk)</option>
-        <option value="1.5">1.5x (Fast)</option>
-      </select>
-    </div>
-    <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">
-      💡 Tip: Press <kbd class="kbd-badge">Alt+R</kbd> for Reading Ruler or <kbd class="kbd-badge">Alt+Z</kbd> for Zen Mode
-    </span>
-  </div>
-
-  <!-- Hidden Audio Transcript for Web Speech TTS -->
-  <div id="lesson-audio-script" class="sr-only"><?= htmlspecialchars($lesson['audioScript'] ?? $lesson['summary']) ?></div>
-
-  <!-- Lesson Content Card -->
-  <article class="lesson-content-card">
-    <span class="lesson-chunk-badge"><?= htmlspecialchars($lesson['badge'] ?? 'Core Lesson') ?></span>
-    <h1 class="lesson-chunk-title"><?= htmlspecialchars($lesson['title']) ?></h1>
-
-    <!-- Lesson Prose (Bionic & TTS Karaoke target) -->
-    <div id="lesson-prose-container" class="lesson-prose bionic-target" data-original-html="<?= htmlspecialchars($lesson['contentHtml']) ?>">
-      <?= $lesson['contentHtml'] ?>
-    </div>
-
-    <!-- "Explain Simply / TL;DR" Box -->
-    <?php if (!empty($lesson['summary'])): ?>
-      <div class="simple-explain-box" role="region" aria-label="Plain language summary">
-        <div class="simple-explain-title">
-          <span aria-hidden="true">💡</span> <span>Explain Simply (TL;DR)</span>
+  <div class="lesson-view-wrapper">
+    <!-- Lesson Header & Audio Narrator Bar -->
+    <div class="card bg-body-tertiary border p-3 mb-4 rounded-3 shadow-sm">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 pb-3 border-bottom mb-3">
+        <a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="btn btn-sm btn-secondary d-inline-flex align-items-center gap-2" aria-label="Return to <?= htmlspecialchars($subject['title']) ?> curriculum">
+          <span>◀</span> <span>Back to <?= htmlspecialchars($subject['title']) ?></span>
+        </a>
+        <div class="text-md-end">
+          <h2 class="h5 fw-bold text-body mb-0"><?= htmlspecialchars($grade['title']) ?> • <?= htmlspecialchars($subject['title']) ?></h2>
+          <span class="small text-body-secondary">Interactive Step-by-Step Lesson</span>
         </div>
-        <p class="simple-explain-text">
-          <?= htmlspecialchars($lesson['summary']) ?>
-        </p>
       </div>
-    <?php endif; ?>
 
-    <!-- Interactive Embedded Widget Container -->
-    <?php if (!empty($lesson['widgetType'])): ?>
-      <div id="embedded-widget-container" class="widget-container" data-widget-type="<?= htmlspecialchars($lesson['widgetType']) ?>" role="region" aria-label="Interactive Learning Widget">
-        <!-- Rendered via JS -->
+      <!-- Audio Controls & Hotkeys Tip -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-sm btn-primary tts-toggle-btn d-inline-flex align-items-center gap-2 shadow-sm" id="tts-lesson-btn" aria-label="Listen to this lesson read aloud (Alt+S)">
+            <span aria-hidden="true">🔊</span> <span>Listen (Aloud)</span>
+          </button>
+          <div class="d-flex align-items-center gap-1">
+            <label for="tts-speed-select" class="small fw-bold text-body-secondary me-1">Speed:</label>
+            <select id="tts-speed-select" class="form-select form-select-sm" style="width: auto;" aria-label="Adjust voice reading rate">
+              <option value="0.75">0.75x (Relaxed)</option>
+              <option value="1.0" selected>1.0x (Normal)</option>
+              <option value="1.25">1.25x (Brisk)</option>
+              <option value="1.5">1.5x (Fast)</option>
+            </select>
+          </div>
+        </div>
+        <span class="small text-body-secondary">
+          💡 Press <kbd class="badge bg-body-secondary text-body-secondary border">Alt+R</kbd> for Reading Ruler or <kbd class="badge bg-body-secondary text-body-secondary border">Alt+Z</kbd> for Zen Mode
+        </span>
       </div>
-    <?php endif; ?>
-
-    <!-- Active Recall Flashcards Section -->
-    <?php if (!empty($lesson['flashcards'])): ?>
-      <div id="flashcards-container" class="flashcards-section" data-flashcards='<?= json_encode($lesson['flashcards']) ?>'>
-        <!-- Flashcards rendered via JS -->
-      </div>
-    <?php endif; ?>
-
-    <!-- Low-Stress Knowledge Check Quiz -->
-    <?php if (!empty($lesson['quiz'])): ?>
-      <div id="lesson-quiz-container" class="quiz-container" data-quiz='<?= json_encode($lesson['quiz']) ?>' data-lesson-id="<?= htmlspecialchars($lesson['id']) ?>" role="region" aria-label="Low stress knowledge check">
-        <!-- Quiz rendered via JS -->
-      </div>
-    <?php endif; ?>
-
-    <!-- Lesson Navigation Footer -->
-    <div class="lesson-footer-bar">
-      <?php if ($prevLesson): ?>
-        <a href="lesson.php?grade=<?= urlencode($gradeId) ?>&subject=<?= urlencode($subjectId) ?>&id=<?= urlencode($prevLesson['id']) ?>" class="btn btn-secondary">
-          ◀ Previous: <?= htmlspecialchars($prevLesson['title']) ?>
-        </a>
-      <?php else: ?>
-        <a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="btn btn-secondary">
-          ◀ Back to <?= htmlspecialchars($subject['title']) ?>
-        </a>
-      <?php endif; ?>
-
-      <?php if ($nextLesson): ?>
-        <a href="lesson.php?grade=<?= urlencode($gradeId) ?>&subject=<?= urlencode($subjectId) ?>&id=<?= urlencode($nextLesson['id']) ?>" class="btn btn-primary">
-          Next Lesson: <?= htmlspecialchars($nextLesson['title']) ?> ➔
-        </a>
-      <?php else: ?>
-        <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary">
-          Complete Subject & Back to <?= htmlspecialchars($grade['title']) ?> 🎉
-        </a>
-      <?php endif; ?>
     </div>
-  </article>
+
+    <!-- Hidden Audio Transcript for Web Speech TTS -->
+    <div id="lesson-audio-script" class="visually-hidden"><?= htmlspecialchars($lesson['audioScript'] ?? $lesson['summary']) ?></div>
+
+    <!-- Lesson Content Card -->
+    <article class="card p-4 p-md-5 border rounded-4 shadow-sm mb-4">
+      <div>
+        <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 mb-3"><?= htmlspecialchars($lesson['badge'] ?? 'Core Lesson') ?></span>
+      </div>
+      <h1 class="display-6 fw-bold text-body mb-4"><?= htmlspecialchars($lesson['title']) ?></h1>
+
+      <!-- Lesson Prose (Bionic & TTS Karaoke target) -->
+      <div id="lesson-prose-container" class="lesson-prose bionic-target fs-5 lh-lg mb-4" data-original-html="<?= htmlspecialchars($lesson['contentHtml']) ?>">
+        <?= $lesson['contentHtml'] ?>
+      </div>
+
+      <!-- "Explain Simply / TL;DR" Box -->
+      <?php if (!empty($lesson['summary'])): ?>
+        <div class="card bg-info-subtle border-info-subtle p-3 my-4 rounded-3" role="region" aria-label="Plain language summary">
+          <div class="d-flex align-items-center gap-2 fw-bold text-info-emphasis mb-2">
+            <span aria-hidden="true">💡</span> <span>Explain Simply (TL;DR)</span>
+          </div>
+          <p class="text-body mb-0">
+            <?= htmlspecialchars($lesson['summary']) ?>
+          </p>
+        </div>
+      <?php endif; ?>
+
+      <!-- Interactive Embedded Widget Container -->
+      <?php if (!empty($lesson['widgetType'])): ?>
+        <div id="embedded-widget-container" class="widget-container my-4" data-widget-type="<?= htmlspecialchars($lesson['widgetType']) ?>" role="region" aria-label="Interactive Learning Widget">
+          <!-- Rendered via JS -->
+        </div>
+      <?php endif; ?>
+
+      <!-- Active Recall Flashcards Section -->
+      <?php if (!empty($lesson['flashcards'])): ?>
+        <div id="flashcards-container" class="flashcards-section my-4" data-flashcards='<?= json_encode($lesson['flashcards']) ?>'>
+          <!-- Flashcards rendered via JS -->
+        </div>
+      <?php endif; ?>
+
+      <!-- Low-Stress Knowledge Check Quiz -->
+      <?php if (!empty($lesson['quiz'])): ?>
+        <div id="lesson-quiz-container" class="quiz-container my-4" data-quiz='<?= json_encode($lesson['quiz']) ?>' data-lesson-id="<?= htmlspecialchars($lesson['id']) ?>" role="region" aria-label="Low stress knowledge check">
+          <!-- Quiz rendered via JS -->
+        </div>
+      <?php endif; ?>
+
+      <!-- Lesson Navigation Footer -->
+      <div class="d-flex justify-content-between align-items-center gap-3 pt-4 border-top mt-5 flex-wrap">
+        <?php if ($prevLesson): ?>
+          <a href="lesson.php?grade=<?= urlencode($gradeId) ?>&subject=<?= urlencode($subjectId) ?>&id=<?= urlencode($prevLesson['id']) ?>" class="btn btn-secondary">
+            ◀ Previous: <?= htmlspecialchars($prevLesson['title']) ?>
+          </a>
+        <?php else: ?>
+          <a href="grade.php?level=<?= urlencode($gradeId) ?>&tab=<?= urlencode($subjectId) ?>" class="btn btn-secondary">
+            ◀ Back to <?= htmlspecialchars($subject['title']) ?>
+          </a>
+        <?php endif; ?>
+
+        <?php if ($nextLesson): ?>
+          <a href="lesson.php?grade=<?= urlencode($gradeId) ?>&subject=<?= urlencode($subjectId) ?>&id=<?= urlencode($nextLesson['id']) ?>" class="btn btn-primary">
+            Next Lesson: <?= htmlspecialchars($nextLesson['title']) ?> ➔
+          </a>
+        <?php else: ?>
+          <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary">
+            Complete Subject & Back to <?= htmlspecialchars($grade['title']) ?> 🎉
+          </a>
+        <?php endif; ?>
+      </div>
+    </article>
+  </div>
 </div>
 
 <!-- Auto-Initialize Lesson Interactive Components on Page Load -->

@@ -182,44 +182,53 @@
   </div>
 </section>
 
-<!-- Keyboard Shortcuts Modal -->
-<div id="shortcuts-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="shortcuts-modal-title">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 id="shortcuts-modal-title" style="font-size: 1.3rem; font-weight: 800;">⌨️ Accessibility Hotkeys & Shortcuts</h3>
-      <button id="close-shortcuts-btn" class="btn btn-secondary btn-icon-only" aria-label="Close Shortcuts Modal">✕</button>
+<!-- Keyboard Shortcuts Modal (Bootstrap 5) -->
+<div class="modal fade" id="shortcuts-modal" tabindex="-1" aria-labelledby="shortcuts-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-bottom">
+        <h3 class="modal-title fs-5 fw-bold text-body" id="shortcuts-modal-title">⌨️ Accessibility Hotkeys & Shortcuts</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <tbody>
+              <tr>
+                <td style="width: 220px;"><kbd class="badge bg-body-secondary text-body border">Alt</kbd> + <kbd class="badge bg-body-secondary text-body border">A</kbd></td>
+                <td>Open / Close Accessibility FAB Accommodations Drawer</td>
+              </tr>
+              <tr>
+                <td><kbd class="badge bg-body-secondary text-body border">Alt</kbd> + <kbd class="badge bg-body-secondary text-body border">R</kbd></td>
+                <td>Toggle Reading Line Ruler</td>
+              </tr>
+              <tr>
+                <td><kbd class="badge bg-body-secondary text-body border">Alt</kbd> + <kbd class="badge bg-body-secondary text-body border">S</kbd></td>
+                <td>Start / Stop Text-to-Speech Audio Narration</td>
+              </tr>
+              <tr>
+                <td><kbd class="badge bg-body-secondary text-body border">Alt</kbd> + <kbd class="badge bg-body-secondary text-body border">Z</kbd></td>
+                <td>Toggle Zen Distraction-Free Focus Mode</td>
+              </tr>
+              <tr>
+                <td><kbd class="badge bg-body-secondary text-body border">Tab</kbd> / <kbd class="badge bg-body-secondary text-body border">Shift+Tab</kbd></td>
+                <td>Navigate interactive elements with high-visibility focus ring</td>
+              </tr>
+              <tr>
+                <td><kbd class="badge bg-body-secondary text-body border">Space</kbd> / <kbd class="badge bg-body-secondary text-body border">Enter</kbd></td>
+                <td>Flip active recall flashcard / Activate buttons</td>
+              </tr>
+              <tr>
+                <td><kbd class="badge bg-body-secondary text-body border">?</kbd></td>
+                <td>Open this keyboard shortcuts cheatsheet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer border-top">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
-    <table class="shortcut-table">
-      <tbody>
-        <tr>
-          <td><kbd class="kbd-badge">Alt</kbd> + <kbd class="kbd-badge">A</kbd></td>
-          <td>Open / Close Accessibility FAB Accommodations Drawer</td>
-        </tr>
-        <tr>
-          <td><kbd class="kbd-badge">Alt</kbd> + <kbd class="kbd-badge">R</kbd></td>
-          <td>Toggle Reading Line Ruler</td>
-        </tr>
-        <tr>
-          <td><kbd class="kbd-badge">Alt</kbd> + <kbd class="kbd-badge">S</kbd></td>
-          <td>Start / Stop Text-to-Speech Audio Narration</td>
-        </tr>
-        <tr>
-          <td><kbd class="kbd-badge">Alt</kbd> + <kbd class="kbd-badge">Z</kbd></td>
-          <td>Toggle Zen Distraction-Free Focus Mode</td>
-        </tr>
-        <tr>
-          <td><kbd class="kbd-badge">Tab</kbd> / <kbd class="kbd-badge">Shift+Tab</kbd></td>
-          <td>Navigate interactive elements with high-visibility focus ring</td>
-        </tr>
-        <tr>
-          <td><kbd class="kbd-badge">Space</kbd> / <kbd class="kbd-badge">Enter</kbd></td>
-          <td>Flip active recall flashcard / Activate buttons</td>
-        </tr>
-        <tr>
-          <td><kbd class="kbd-badge">?</kbd></td>
-          <td>Open this keyboard shortcuts cheatsheet</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

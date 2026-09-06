@@ -65,128 +65,137 @@ include __DIR__ . '/includes/header.php';
   })();
 </script>
 
-<!-- Breadcrumbs & Quick Grade Switcher Navigation -->
-<div class="grade-top-nav-bar">
-  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-    <a href="index.php">Home</a>
-    <span aria-hidden="true">›</span>
-    <span aria-current="page"><?= htmlspecialchars($grade['title']) ?></span>
-  </nav>
+<div class="container py-4">
+  <!-- Breadcrumbs & Quick Grade Switcher Navigation -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($grade['title']) ?></li>
+      </ol>
+    </nav>
 
-  <!-- Quick Grade Switcher -->
-  <div class="grade-quick-switcher" role="navigation" aria-label="Quick jump to another grade level">
-    <span class="switcher-title">Jump to Grade:</span>
-    <div class="switcher-pills-row">
-      <?php foreach ($allGrades as $gId => $g): ?>
-        <a href="grade.php?level=<?= urlencode($gId) ?>" 
-           class="grade-switcher-pill <?= ($gId === $gradeId) ? 'active' : '' ?>"
-           onclick="document.cookie='hestens_selected_grade=<?= urlencode($gId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gId) ?>');"
-           title="<?= htmlspecialchars($g['fullName']) ?>"
-           aria-label="<?= htmlspecialchars($g['title']) ?>">
-          <?= htmlspecialchars($g['title']) ?>
-        </a>
+    <!-- Quick Grade Switcher -->
+    <div class="d-flex align-items-center gap-2 flex-wrap" role="navigation" aria-label="Quick jump to another grade level">
+      <span class="small fw-bold text-body-secondary">Grade:</span>
+      <div class="d-flex flex-wrap gap-1">
+        <?php foreach ($allGrades as $gId => $g): ?>
+          <a href="grade.php?level=<?= urlencode($gId) ?>" 
+             class="btn btn-sm <?= ($gId === $gradeId) ? 'btn-primary' : 'btn-outline-secondary' ?> rounded-pill px-2 py-0"
+             onclick="document.cookie='hestens_selected_grade=<?= urlencode($gId) ?>; path=/; max-age=86400'; sessionStorage.setItem('hestens_selected_grade', '<?= urlencode($gId) ?>');"
+             title="<?= htmlspecialchars($g['fullName']) ?>"
+             aria-label="<?= htmlspecialchars($g['title']) ?>">
+            <?= htmlspecialchars($g['title']) ?>
+          </a>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grade Header Hero with Aurora Mesh -->
+  <?php 
+    $tierMeshClass = ($grade['tier'] === 'early' || $grade['tier'] === 'elementary') ? 'aurora-mesh-elementary' : 'aurora-mesh-' . htmlspecialchars($grade['tier']); 
+  ?>
+  <section class="grade-hero-banner <?= $tierMeshClass ?> p-4 p-md-5 rounded-4 mb-4 text-white shadow-sm d-flex flex-column flex-md-row align-items-center gap-4" aria-labelledby="grade-page-title">
+    <div class="grade-hero-icon display-2" aria-hidden="true"><?= $grade['icon'] ?></div>
+    <div class="grade-hero-content text-center text-md-start">
+      <div class="badge rounded-pill bg-dark bg-opacity-50 text-white border border-white border-opacity-25 px-3 py-1 mb-2">
+        <?= ucfirst($grade['tier']) ?> Learning Tier
+      </div>
+      <h1 id="grade-page-title" class="display-6 fw-bold mb-2 text-white"><?= htmlspecialchars($grade['fullName']) ?></h1>
+      <p class="lead mb-0 text-white-50" style="max-width: 720px;"><?= htmlspecialchars($grade['description']) ?></p>
+    </div>
+  </section>
+
+  <!-- Subject Tabs & Lesson Directory -->
+  <section class="grade-curriculum-container mb-5" aria-labelledby="subjects-heading">
+    <h2 id="subjects-heading" class="visually-hidden"><?= htmlspecialchars($grade['title']) ?> Subjects</h2>
+
+    <!-- 4 Subject Tabs using Bootstrap nav-pills -->
+    <ul class="nav nav-pills nav-fill gap-2 p-2 bg-body-tertiary border rounded-3 mb-4" role="tablist" aria-label="<?= htmlspecialchars($grade['title']) ?> Subject Areas">
+      <?php foreach ($grade['subjects'] as $subKey => $subject): ?>
+        <?php $isSelected = ($subKey === $activeTab); ?>
+        <li class="nav-item" role="presentation">
+          <button 
+            class="nav-link subject-tab-btn d-flex align-items-center justify-content-center gap-2 py-2 px-3 <?= $isSelected ? 'active' : '' ?>" 
+            data-subject="<?= $subKey ?>" 
+            role="tab" 
+            aria-selected="<?= $isSelected ? 'true' : 'false' ?>"
+            aria-controls="subject-panel-<?= $subKey ?>"
+            id="tab-<?= $subKey ?>"
+          >
+            <span aria-hidden="true"><?= $subject['icon'] ?></span>
+            <span class="fw-bold"><?= htmlspecialchars($subject['title']) ?></span>
+            <?php if (!empty($subject['lessons'])): ?>
+              <span class="badge rounded-pill bg-body-secondary text-body-secondary ms-1"><?= count($subject['lessons']) ?></span>
+            <?php endif; ?>
+          </button>
+        </li>
       <?php endforeach; ?>
-    </div>
-  </div>
-</div>
+    </ul>
 
-<!-- Grade Header Hero with Aurora Mesh -->
-<?php 
-  $tierMeshClass = ($grade['tier'] === 'early' || $grade['tier'] === 'elementary') ? 'aurora-mesh-elementary' : 'aurora-mesh-' . htmlspecialchars($grade['tier']); 
-?>
-<section class="grade-hero-banner <?= $tierMeshClass ?>" aria-labelledby="grade-page-title">
-  <div class="grade-hero-icon"><?= $grade['icon'] ?></div>
-  <div class="grade-hero-content">
-    <div class="hero-badge" style="background:rgba(0,0,0,0.3); color:#ffffff; border:1px solid rgba(255,255,255,0.2);">
-      <?= ucfirst($grade['tier']) ?> Learning Tier
-    </div>
-    <h1 id="grade-page-title" class="grade-hero-title" style="color:#ffffff;"><?= htmlspecialchars($grade['fullName']) ?></h1>
-    <p class="grade-hero-desc" style="color:rgba(255,255,255,0.9);"><?= htmlspecialchars($grade['description']) ?></p>
-  </div>
-</section>
-
-<!-- Subject Tabs & Lesson Directory -->
-<section class="grade-curriculum-container" aria-labelledby="subjects-heading">
-  <h2 id="subjects-heading" class="sr-only"><?= htmlspecialchars($grade['title']) ?> Subjects</h2>
-
-  <!-- 4 Subject Tabs -->
-  <div class="subject-tabs-nav" role="tablist" aria-label="<?= htmlspecialchars($grade['title']) ?> Subject Areas">
+    <!-- Subject Panels -->
     <?php foreach ($grade['subjects'] as $subKey => $subject): ?>
       <?php $isSelected = ($subKey === $activeTab); ?>
-      <button 
-        class="subject-tab-btn <?= $isSelected ? 'active' : '' ?>" 
-        data-subject="<?= $subKey ?>" 
-        role="tab" 
-        aria-selected="<?= $isSelected ? 'true' : 'false' ?>"
-        aria-controls="subject-panel-<?= $subKey ?>"
-        id="tab-<?= $subKey ?>"
+      <div 
+        id="subject-panel-<?= $subKey ?>" 
+        class="subject-panel <?= $isSelected ? 'active' : '' ?>" 
+        role="tabpanel" 
+        aria-labelledby="tab-<?= $subKey ?>"
+        <?= !$isSelected ? 'hidden' : '' ?>
       >
-        <span class="tab-icon" aria-hidden="true"><?= $subject['icon'] ?></span>
-        <span class="tab-label"><?= htmlspecialchars($subject['title']) ?></span>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-4 pb-2 border-bottom">
+          <div>
+            <h3 class="h4 fw-bold text-body mb-1">
+              <span aria-hidden="true"><?= $subject['icon'] ?></span> <?= htmlspecialchars($subject['title']) ?>
+            </h3>
+            <p class="text-body-secondary mb-0"><?= htmlspecialchars($subject['description']) ?></p>
+          </div>
+          <div class="badge rounded-pill bg-info-subtle text-info border border-info-subtle px-3 py-2">
+            <span>📖 <?= count($subject['lessons']) ?> Interactive Lesson<?= count($subject['lessons']) === 1 ? '' : 's' ?></span>
+          </div>
+        </div>
+
+        <!-- Lessons Grid -->
         <?php if (!empty($subject['lessons'])): ?>
-          <span class="tab-count-badge"><?= count($subject['lessons']) ?></span>
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <?php foreach ($subject['lessons'] as $idx => $lesson): ?>
+              <div class="col">
+                <article class="card h-100 shadow-sm border p-3 d-flex flex-column lesson-card-item" data-lesson-id="<?= htmlspecialchars($lesson['id']) ?>">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle"><?= htmlspecialchars($lesson['badge']) ?></span>
+                    <span class="small text-body-secondary">⏱️ <?= htmlspecialchars($lesson['time'] ?? '8 min') ?></span>
+                  </div>
+                  <h4 class="h5 fw-bold text-body mb-2"><?= htmlspecialchars($lesson['title']) ?></h4>
+                  <p class="small text-body-secondary flex-grow-1 mb-3"><?= htmlspecialchars($lesson['summary']) ?></p>
+                  
+                  <div class="d-flex justify-content-between align-items-center pt-2 border-top mt-auto">
+                    <span class="badge bg-secondary-subtle text-body-secondary" id="status-<?= htmlspecialchars($lesson['id']) ?>">Ready to Start</span>
+                    <a href="lesson.php?grade=<?= urlencode($gradeId) ?>&subject=<?= urlencode($subKey) ?>&id=<?= urlencode($lesson['id']) ?>" class="btn btn-sm btn-primary" aria-label="Start lesson: <?= htmlspecialchars($lesson['title']) ?>">
+                      Start Lesson ➔
+                    </a>
+                  </div>
+                </article>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        <?php else: ?>
+          <!-- Accessible Placeholder when lessons are expanding -->
+          <div class="card bg-body-tertiary border text-center p-5 rounded-4">
+            <div class="display-3 mb-3">🌱</div>
+            <h4 class="fw-bold text-body">Curriculum Module in Active Expansion</h4>
+            <p class="text-body-secondary mx-auto mb-4" style="max-width: 500px;">
+              We are actively adapting this <?= htmlspecialchars($subject['title']) ?> module with multi-sensory interactive widgets. Check back soon or explore our foundational lessons!
+            </p>
+            <div>
+              <a href="index.php" class="btn btn-secondary">Explore Other Grades</a>
+            </div>
+          </div>
         <?php endif; ?>
-      </button>
-    <?php endforeach; ?>
-  </div>
-
-  <!-- Subject Panels -->
-  <?php foreach ($grade['subjects'] as $subKey => $subject): ?>
-    <?php $isSelected = ($subKey === $activeTab); ?>
-    <div 
-      id="subject-panel-<?= $subKey ?>" 
-      class="subject-panel <?= $isSelected ? 'active' : '' ?>" 
-      role="tabpanel" 
-      aria-labelledby="tab-<?= $subKey ?>"
-      <?= !$isSelected ? 'hidden' : '' ?>
-    >
-      <div class="subject-panel-header">
-        <div>
-          <h3 class="subject-panel-title">
-            <span aria-hidden="true"><?= $subject['icon'] ?></span> <?= htmlspecialchars($subject['title']) ?>
-          </h3>
-          <p class="subject-panel-desc"><?= htmlspecialchars($subject['description']) ?></p>
-        </div>
-        <div class="subject-meta-pill">
-          <span>📖 <?= count($subject['lessons']) ?> Interactive Lesson<?= count($subject['lessons']) === 1 ? '' : 's' ?></span>
-        </div>
       </div>
-
-      <!-- Lessons Grid -->
-      <?php if (!empty($subject['lessons'])): ?>
-        <div class="lessons-list-grid">
-          <?php foreach ($subject['lessons'] as $idx => $lesson): ?>
-            <article class="lesson-card-item" data-lesson-id="<?= htmlspecialchars($lesson['id']) ?>">
-              <div class="lesson-card-top">
-                <span class="lesson-badge"><?= htmlspecialchars($lesson['badge']) ?></span>
-                <span class="lesson-time">⏱️ <?= htmlspecialchars($lesson['time'] ?? '8 min') ?></span>
-              </div>
-              <h4 class="lesson-card-title"><?= htmlspecialchars($lesson['title']) ?></h4>
-              <p class="lesson-card-summary"><?= htmlspecialchars($lesson['summary']) ?></p>
-              
-              <div class="lesson-card-action">
-                <span class="lesson-status-tag" id="status-<?= htmlspecialchars($lesson['id']) ?>">Ready to Start</span>
-                <a href="lesson.php?grade=<?= urlencode($gradeId) ?>&subject=<?= urlencode($subKey) ?>&id=<?= urlencode($lesson['id']) ?>" class="btn btn-primary" aria-label="Start lesson: <?= htmlspecialchars($lesson['title']) ?>">
-                  Start Lesson ➔
-                </a>
-              </div>
-            </article>
-          <?php endforeach; ?>
-        </div>
-      <?php else: ?>
-        <!-- Accessible Placeholder when lessons are expanding -->
-        <div class="empty-subject-state">
-          <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🌱</div>
-          <h4>Curriculum Module in Active Expansion</h4>
-          <p style="color:var(--text-secondary); max-width:500px; margin:0.5rem auto 1.5rem;">
-            We are actively adapting this <?= htmlspecialchars($subject['title']) ?> module with multi-sensory interactive widgets. Check back soon or explore our foundational lessons!
-          </p>
-          <a href="index.php" class="btn btn-secondary">Explore Other Grades</a>
-        </div>
-      <?php endif; ?>
-    </div>
-  <?php endforeach; ?>
-</section>
+    <?php endforeach; ?>
+  </section>
+</div>
 
 <!-- Subject Tab Switching Script -->
 <script>
@@ -233,7 +242,8 @@ include __DIR__ . '/includes/header.php';
       const tag = document.getElementById('status-' + id);
       if (tag) {
         tag.textContent = '✓ Mastered';
-        tag.classList.add('mastered');
+        tag.classList.remove('bg-secondary-subtle');
+        tag.classList.add('bg-success', 'text-white');
       }
     });
   });

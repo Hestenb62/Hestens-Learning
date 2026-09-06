@@ -14,49 +14,65 @@ $activePage = 'search';
 include __DIR__ . '/includes/header.php';
 ?>
 
-<div class="search-page-container">
-  <div class="section-header" style="margin-bottom: 2rem;">
-    <div>
-      <h1 class="section-title">
-        <?= empty($query) ? 'Search Curriculum' : 'Search Results for "' . htmlspecialchars($query) . '"' ?>
-      </h1>
-      <p style="color:var(--text-secondary); margin-top:0.25rem;">
-        Found <?= count($results) ?> matching lesson<?= count($results) === 1 ? '' : 's' ?> and subject<?= count($results) === 1 ? '' : 's' ?> across Pre-K through 12th Grade.
-      </p>
-    </div>
+<div class="container py-4">
+  <div class="pb-3 border-bottom mb-4">
+    <h1 class="h2 fw-bold text-body mb-1">
+      <?= empty($query) ? 'Search Curriculum' : 'Search Results for "' . htmlspecialchars($query) . '"' ?>
+    </h1>
+    <p class="text-body-secondary mb-0">
+      Found <?= count($results) ?> matching lesson<?= count($results) === 1 ? '' : 's' ?> and subject<?= count($results) === 1 ? '' : 's' ?> across Pre-K through 12th Grade.
+    </p>
   </div>
 
+  <!-- In-page Search Bar -->
+  <form action="search.php" method="GET" class="mb-5 mx-auto" style="max-width: 680px;" role="search">
+    <div class="input-group input-group-lg shadow-sm">
+      <input type="search" name="q" value="<?= htmlspecialchars($query) ?>" class="form-control rounded-start-pill ps-4" placeholder="Search lessons, topics, or subjects..." aria-label="Search curriculum">
+      <button class="btn btn-primary rounded-end-pill px-4 fw-bold" type="submit">
+        Search 🔍
+      </button>
+    </div>
+  </form>
+
   <?php if (!empty($results)): ?>
-    <div class="search-results-list">
+    <div class="d-flex flex-column gap-3 mb-5">
       <?php foreach ($results as $item): ?>
-        <article class="search-result-card">
-          <div class="result-icon-box"><?= $item['icon'] ?></div>
-          <div class="result-info">
-            <div class="result-tags">
-              <span class="card-pill"><?= htmlspecialchars($item['grade']) ?></span>
-              <?php if (isset($item['subject'])): ?>
-                <span class="card-pill"><?= htmlspecialchars($item['subject']) ?></span>
-              <?php endif; ?>
+        <article class="card border rounded-4 p-4 shadow-sm">
+          <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+            <div class="d-flex align-items-start gap-3">
+              <div class="display-6" aria-hidden="true"><?= $item['icon'] ?></div>
+              <div>
+                <div class="d-flex flex-wrap gap-1 mb-2">
+                  <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle"><?= htmlspecialchars($item['grade']) ?></span>
+                  <?php if (isset($item['subject'])): ?>
+                    <span class="badge rounded-pill bg-secondary-subtle text-body-secondary border"><?= htmlspecialchars($item['subject']) ?></span>
+                  <?php endif; ?>
+                </div>
+                <h2 class="h5 fw-bold mb-1">
+                  <a href="<?= htmlspecialchars($item['url']) ?>" class="text-decoration-none text-body"><?= htmlspecialchars($item['title']) ?></a>
+                </h2>
+                <p class="text-body-secondary small mb-0"><?= htmlspecialchars($item['snippet']) ?></p>
+              </div>
             </div>
-            <h2 class="result-title">
-              <a href="<?= htmlspecialchars($item['url']) ?>"><?= htmlspecialchars($item['title']) ?></a>
-            </h2>
-            <p class="result-snippet"><?= htmlspecialchars($item['snippet']) ?></p>
+            <div class="text-md-end pt-2 pt-md-0">
+              <a href="<?= htmlspecialchars($item['url']) ?>" class="btn btn-primary text-nowrap px-4 py-2">
+                Open Lesson ➔
+              </a>
+            </div>
           </div>
-          <a href="<?= htmlspecialchars($item['url']) ?>" class="btn btn-primary" style="align-self:center;">
-            Open ➔
-          </a>
         </article>
       <?php endforeach; ?>
     </div>
   <?php else: ?>
-    <div class="empty-search-box">
-      <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
-      <h2 style="font-size: 1.4rem; font-weight: 800;">No matching lessons found for "<?= htmlspecialchars($query) ?>"</h2>
-      <p style="color:var(--text-secondary); max-width: 500px; margin: 0.5rem auto 1.5rem;">
+    <div class="card bg-body-tertiary border text-center p-5 rounded-4 mx-auto" style="max-width: 650px;">
+      <div class="display-3 mb-3" aria-hidden="true">🔍</div>
+      <h2 class="h4 fw-bold text-body mb-2">No matching lessons found for "<?= htmlspecialchars($query) ?>"</h2>
+      <p class="text-body-secondary mx-auto mb-4" style="max-width: 480px;">
         Try searching for broader keywords like <em>Math</em>, <em>Fractions</em>, <em>Phonics</em>, <em>Space</em>, <em>Science</em>, or <em>Budget</em>.
       </p>
-      <a href="index.php" class="btn btn-primary">Browse All Grades</a>
+      <div>
+        <a href="index.php" class="btn btn-primary px-4 py-2">Browse All Grades</a>
+      </div>
     </div>
   <?php endif; ?>
 </div>

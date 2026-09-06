@@ -421,11 +421,23 @@
   border-radius: var(--radius-full);
   outline: none;
   -webkit-appearance: none;
+  appearance: none;
   cursor: pointer;
 }
 
 .a11y-range::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid #ffffff;
+}
+
+.a11y-range::-moz-range-thumb {
   width: 22px;
   height: 22px;
   border-radius: 50%;
@@ -1596,4 +1608,148 @@ input:checked + .toggle-slider:before {
     height: 48px;
     justify-content: center;
   }
+}
+
+/* ==========================================================================
+   Bootstrap 5 Theme Harmonization & Neurodiversity Enhancements
+   ========================================================================== */
+
+/* Navbar & Header */
+.app-header-wrapper {
+  z-index: 1030;
+}
+
+.app-navbar {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+
+.brand-title {
+  color: var(--text-primary);
+}
+
+.brand-subtext {
+  color: var(--text-muted);
+}
+
+.app-navbar .nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus {
+  color: var(--accent-primary);
+  background: var(--bg-tertiary);
+}
+
+.app-navbar .nav-link.active {
+  color: var(--text-primary) !important;
+  background: var(--bg-secondary) !important;
+}
+
+/* Bootstrap Cards */
+.card {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--accent-glow);
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.dropdown-item {
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  margin: 0.15rem 0.35rem;
+  width: auto;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--bg-tertiary);
+  color: var(--accent-primary);
+}
+
+.dropdown-header {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.dropdown-divider {
+  border-top-color: var(--border-subtle);
+}
+
+/* Bootstrap Form Controls */
+.form-control, .form-select {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 0.25rem var(--accent-glow);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background: linear-gradient(135deg, var(--accent-hover), var(--accent-primary));
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.btn-secondary {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Badges */
+.badge {
+  font-family: inherit;
+  font-weight: 600;
 }
