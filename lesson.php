@@ -80,8 +80,14 @@ include __DIR__ . '/includes/header.php';
 
     <!-- Lesson Content Card -->
     <article class="card p-4 p-md-5 border rounded-4 shadow-sm mb-4">
-      <div>
-        <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 mb-3"><?= htmlspecialchars($lesson['badge'] ?? 'Core Lesson') ?></span>
+      <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+        <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-3 py-2"><?= htmlspecialchars($lesson['badge'] ?? 'Core Lesson') ?></span>
+        <?php $lessonStds = get_lesson_standards($lesson, $subjectId, $gradeId); ?>
+        <?php foreach ($lessonStds as $lstd): ?>
+          <span class="badge bg-body-secondary text-body-secondary border px-3 py-2 d-inline-flex align-items-center gap-1" title="<?= htmlspecialchars($lstd['description']) ?>">
+            <strong class="text-primary">🏛️ <?= htmlspecialchars($lstd['framework']) ?>:</strong> <code class="text-body-emphasis"><?= htmlspecialchars($lstd['code']) ?></code>
+          </span>
+        <?php endforeach; ?>
       </div>
       <h1 class="display-6 fw-bold text-body mb-4"><?= htmlspecialchars($lesson['title']) ?></h1>
 

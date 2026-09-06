@@ -149,7 +149,20 @@ include __DIR__ . '/includes/header.php';
                     <span class="small text-body-secondary">⏱️ <?= htmlspecialchars($lesson['time'] ?? '8 min') ?></span>
                   </div>
                   <h4 class="h5 fw-bold text-body mb-2"><?= htmlspecialchars($lesson['title']) ?></h4>
-                  <p class="small text-body-secondary flex-grow-1 mb-3"><?= htmlspecialchars($lesson['summary']) ?></p>
+                  <p class="small text-body-secondary flex-grow-1 mb-2"><?= htmlspecialchars($lesson['summary']) ?></p>
+                  
+                  <!-- Standards Alignment Badge -->
+                  <?php $standards = get_lesson_standards($lesson, $subKey, $gradeId); ?>
+                  <?php if (!empty($standards)): ?>
+                    <div class="d-flex flex-wrap gap-1 align-items-center mb-3" aria-label="Educational Standards Alignment">
+                      <?php foreach ($standards as $std): ?>
+                        <span class="badge bg-body-secondary text-body-secondary border px-2 py-1 small d-inline-flex align-items-center gap-1" title="<?= htmlspecialchars($std['description']) ?>">
+                          <span class="fw-bold text-primary">🏛️ <?= htmlspecialchars($std['framework']) ?>:</span>
+                          <code class="text-body-emphasis"><?= htmlspecialchars($std['code']) ?></code>
+                        </span>
+                      <?php endforeach; ?>
+                    </div>
+                  <?php endif; ?>
                   
                   <div class="d-flex justify-content-between align-items-center pt-2 border-top mt-auto">
                     <span class="badge bg-secondary-subtle text-body-secondary" id="status-<?= htmlspecialchars($lesson['id']) ?>">Ready to Start</span>

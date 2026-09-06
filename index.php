@@ -135,7 +135,18 @@ include __DIR__ . '/includes/header.php';
                 </div>
               </div>
 
-              <div class="d-flex justify-content-end pt-3 border-top border-white border-opacity-25">
+              <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top border-white border-opacity-25">
+                <button 
+                  type="button" 
+                  class="btn btn-outline-light btn-lg px-3 py-2 rounded-pill d-inline-flex align-items-center gap-2 glass-pill shadow-sm"
+                  data-bs-toggle="modal" 
+                  data-bs-target="#curriculumOutlineModal-<?= htmlspecialchars($gradeId) ?>" 
+                  onclick="event.stopPropagation();"
+                  aria-label="View <?= htmlspecialchars($grade['title']) ?> Curriculum Outline"
+                >
+                  <span aria-hidden="true">📋</span>
+                  <span>Curriculum Outline</span>
+                </button>
                 <a 
                   href="grade.php?level=<?= urlencode($gradeId) ?>" 
                   class="btn action-btn-explore btn-lg px-4 py-2 d-inline-flex align-items-center gap-2" 
@@ -152,6 +163,113 @@ include __DIR__ . '/includes/header.php';
       <?php endforeach; ?>
     </div>
   </section>
+
+  <!-- ================= CURRICULUM OUTLINE MODALS ================= -->
+  <?php foreach ($allGrades as $gradeId => $grade): ?>
+    <?php
+    $modalTier = ($grade['tier'] === 'early' || $grade['tier'] === 'elementary') ? 'elementary' : $grade['tier'];
+    ?>
+    <div class="modal fade" id="curriculumOutlineModal-<?= htmlspecialchars($gradeId) ?>" tabindex="-1" aria-labelledby="curriculumOutlineModalLabel-<?= htmlspecialchars($gradeId) ?>" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+          <!-- Modal Header with Tier Aurora Gradient -->
+          <div class="modal-header aurora-card-<?= htmlspecialchars($modalTier) ?> text-white p-4 border-0">
+            <div class="d-flex align-items-center gap-3">
+              <div class="display-5" aria-hidden="true"><?= $grade['icon'] ?></div>
+              <div>
+                <div class="badge rounded-pill bg-black bg-opacity-35 text-white border border-white border-opacity-25 px-3 py-1 mb-1">
+                  <?= ucfirst($grade['tier']) ?> School • 4 Core Subjects
+                </div>
+                <h3 class="h3 fw-bold text-white mb-0" id="curriculumOutlineModalLabel-<?= htmlspecialchars($gradeId) ?>">
+                  <?= htmlspecialchars($grade['title']) ?> Curriculum Outline
+                </h3>
+                <p class="text-white-50 small mb-0"><?= htmlspecialchars($grade['fullName']) ?></p>
+              </div>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close Outline Modal"></button>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body p-4 bg-body">
+            <p class="lead fs-6 text-body-secondary mb-4 pb-3 border-bottom">
+              <?= htmlspecialchars($grade['description']) ?>
+            </p>
+
+            <h4 class="h6 text-uppercase fw-bold text-body-secondary mb-3">
+              📚 Core Subject Standards & Learning Outline
+            </h4>
+
+            <!-- Subjects Accordion -->
+            <div class="accordion accordion-flush rounded-3 border overflow-hidden mb-3" id="outlineAccordion-<?= htmlspecialchars($gradeId) ?>">
+              <?php foreach ($grade['subjects'] as $subKey => $subject): ?>
+                <div class="accordion-item">
+                  <h5 class="accordion-header" id="heading-<?= $gradeId ?>-<?= $subKey ?>">
+                    <button class="accordion-button <?= $subKey !== 'math' ? 'collapsed' : '' ?> fw-bold d-flex align-items-center gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?= $gradeId ?>-<?= $subKey ?>" aria-expanded="<?= $subKey === 'math' ? 'true' : 'false' ?>" aria-controls="collapse-<?= $gradeId ?>-<?= $subKey ?>">
+                      <span class="fs-5" aria-hidden="true"><?= $subject['icon'] ?></span>
+                      <span class="fs-6"><?= htmlspecialchars(get_subject_display_name($subKey, $subject['title'])) ?></span>
+                      <span class="badge rounded-pill bg-body-secondary text-body-secondary ms-auto me-2">
+                        <?= count($subject['lessons'] ?? []) ?> Lesson<?= count($subject['lessons'] ?? []) === 1 ? '' : 's' ?>
+                      </span>
+                    </button>
+                  </h5>
+                  <div id="collapse-<?= $gradeId ?>-<?= $subKey ?>" class="accordion-collapse collapse <?= $subKey === 'math' ? 'show' : '' ?>" aria-labelledby="heading-<?= $gradeId ?>-<?= $subKey ?>" data-bs-parent="#outlineAccordion-<?= htmlspecialchars($gradeId) ?>">
+                    <div class="accordion-body bg-body-tertiary">
+                      <p class="small text-body-secondary mb-3">
+                        <?= htmlspecialchars($subject['description']) ?>
+                      </p>
+
+                      <?php if (!empty($subject['lessons'])): ?>
+                        <div class="list-group list-group-flush rounded-3 border bg-body shadow-sm">
+                          <?php foreach ($subject['lessons'] as $idx => $lesson): ?>
+                            <?php $lessonStds = get_lesson_standards($lesson, $subKey, $gradeId); ?>
+                            <div class="list-group-item p-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+                              <div>
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                  <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle small"><?= htmlspecialchars($lesson['badge']) ?></span>
+                                  <span class="small text-body-secondary">⏱️ <?= htmlspecialchars($lesson['time'] ?? '8 min') ?></span>
+                                </div>
+                                <h6 class="fw-bold text-body mb-1"><?= htmlspecialchars($lesson['title']) ?></h6>
+                                <p class="small text-body-secondary mb-1"><?= htmlspecialchars($lesson['summary']) ?></p>
+                                <?php if (!empty($lessonStds)): ?>
+                                  <div class="d-flex flex-wrap gap-1 align-items-center mt-1">
+                                    <?php foreach ($lessonStds as $std): ?>
+                                      <span class="badge bg-body-secondary text-body-secondary border px-2 py-0 small" title="<?= htmlspecialchars($std['description']) ?>">
+                                        <span class="fw-bold text-primary">🏛️ <?= htmlspecialchars($std['framework']) ?>:</span> <code class="text-body-emphasis"><?= htmlspecialchars($std['code']) ?></code>
+                                      </span>
+                                    <?php endforeach; ?>
+                                  </div>
+                                <?php endif; ?>
+                              </div>
+                              <div class="flex-shrink-0">
+                                <a href="lesson.php?grade=<?= urlencode($gradeId) ?>&subject=<?= urlencode($subKey) ?>&id=<?= urlencode($lesson['id']) ?>" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                  Start ➔
+                                </a>
+                              </div>
+                            </div>
+                          <?php endforeach; ?>
+                        </div>
+                      <?php else: ?>
+                        <p class="text-body-secondary small fst-italic mb-0">Interactive lessons currently in active development.</p>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer bg-body-tertiary d-flex justify-content-between">
+            <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+            <a href="grade.php?level=<?= urlencode($gradeId) ?>" class="btn btn-primary rounded-pill px-4 d-inline-flex align-items-center gap-2">
+              <span>Open Full <?= htmlspecialchars($grade['title']) ?> Curriculum</span>
+              <span aria-hidden="true">➔</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php endforeach; ?>
 
   <!-- ================= DIAGNOSTIC ASSESSMENT PROMO BANNER ================= -->
   <section class="card bg-body-tertiary border shadow-sm p-4 p-md-5 my-5 rounded-4" aria-labelledby="promo-title">
